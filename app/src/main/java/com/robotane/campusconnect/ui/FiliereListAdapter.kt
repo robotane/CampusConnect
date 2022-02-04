@@ -22,18 +22,26 @@ class FiliereListAdapter : ListAdapter<Filiere, FiliereListAdapter.FiliereViewHo
     }
 
     class FiliereViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
-        private val filiereNomView: TextView = itemView.findViewById(R.id.filiereTextView)
-        private val ufrView: TextView = itemView.findViewById(R.id.ufrTextView)
+        private val filiereNomView: TextView = itemView.findViewById(R.id.item_filiere_name_lbl)
+        private val ufrView: TextView = itemView.findViewById(R.id.item_filiere_ufr_lbl)
+        private val universiteView: TextView = itemView.findViewById(R.id.item_filiere_universite_lbl)
+        private val filiereSeries: TextView = itemView.findViewById(R.id.item_filiere_series_lbl)
+        private val placesRestantes: TextView = itemView.findViewById(R.id.item_filiere_places_restantes_lbl)
 
         fun bind(filiere: Filiere?) {
             filiereNomView.text = filiere?.nom
-            ufrView.text = ufrView.context.getString(R.string.filiereRcVUfrUniversite, filiere?.ufr, filiere?.nomUniversite)
+            ufrView.text = filiere?.ufr
+            universiteView.text = filiere?.nomUniversite
+//            ufrView.text = ufrView.context.getString(R.string.filiereRcVUfrUniversite, filiere?.ufr, filiere?.nomUniversite)
+            filiereSeries.text = "Séries autorisées: ${filiere?.series} ${if (filiere?.debouches != null) "\n\nDébouchés: ${filiere?.debouches}" else ""}"
+//            numberview.text = filiere?.id.toString()
+            placesRestantes.text = "${if(filiere?.placesRestantes != null) filiere?.placesRestantes else 0} places restantes"
         }
 
         companion object {
             fun create(parent: ViewGroup): FiliereViewHolder {
                 val view: View = LayoutInflater.from(parent.context)
-                    .inflate(R.layout.recyclerview_item, parent, false)
+                    .inflate(R.layout.item_filiere, parent, false)
                 return FiliereViewHolder(view)
             }
         }
