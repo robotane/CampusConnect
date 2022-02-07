@@ -1,105 +1,116 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:cardView="http://schemas.android.com/apk/res-auto"
+<com.google.android.material.card.MaterialCardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/item_filiere_carView"
+    style="?attr/materialCardViewElevatedStyle"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_margin="8dp"
-    cardView:cardCornerRadius="8dp"
-    cardView:cardElevation="5dp">
+    android:layout_marginStart="@dimen/dimen_common"
+    android:layout_marginTop="@dimen/dimen_common_very_small"
+    android:layout_marginEnd="@dimen/dimen_common"
+    android:layout_marginBottom="@dimen/dimen_common_very_small"
+    android:elevation="@dimen/dimen_common_small">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:background="@color/white">
+        android:layout_height="match_parent">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/item_filiere_constraintLayout"
-            style="@style/text_title"
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            cardView:layout_constraintEnd_toEndOf="parent"
-            cardView:layout_constraintStart_toStartOf="parent"
-            cardView:layout_constraintTop_toTopOf="parent">
+            android:background="@color/colorPrimary"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
 
             <ImageView
                 android:id="@+id/item_filiere_ic_universite"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                cardView:layout_constraintBottom_toBottomOf="@+id/item_filiere_name_lbl"
-                cardView:layout_constraintStart_toStartOf="parent"
-                cardView:layout_constraintTop_toTopOf="parent"
-                cardView:srcCompat="@android:drawable/ic_menu_report_image" />
+                app:layout_constraintBottom_toBottomOf="@+id/item_filiere_name_lbl"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:srcCompat="@android:drawable/ic_menu_report_image" />
 
             <TextView
                 android:id="@+id/item_filiere_name_lbl"
-                style="@style/TextAppearance.Material3.BodyMedium"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="4dp"
-                android:layout_marginTop="4dp"
+                android:layout_marginStart="@dimen/dimen_common_very_small"
+                android:layout_marginTop="@dimen/dimen_common_very_small"
                 android:text="Mathématiques Physique Informatiques"
-                cardView:layout_constraintEnd_toEndOf="parent"
-                cardView:layout_constraintStart_toEndOf="@+id/item_filiere_ic_universite"
-                cardView:layout_constraintTop_toTopOf="parent" />
-
+                android:textAppearance="?attr/textAppearanceBodyMedium"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/item_filiere_ic_universite"
+                app:layout_constraintTop_toTopOf="parent" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 
         <TextView
             android:id="@+id/item_filiere_ufr_lbl"
-            style="@style/TextAppearance.Material3.BodyMedium"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginStart="8dp"
+            android:layout_marginStart="@dimen/dimen_common_small"
             android:text="UFR/ST"
-            cardView:layout_constraintEnd_toEndOf="parent"
-            cardView:layout_constraintStart_toStartOf="parent"
-            cardView:layout_constraintTop_toBottomOf="@+id/item_filiere_constraintLayout" />
+            android:textAppearance="?attr/textAppearanceBodyMedium"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/item_filiere_constraintLayout" />
 
         <TextView
             android:id="@+id/item_filiere_universite_lbl"
             android:layout_width="0dp"
-            style="@style/Widget.AppCompat.RatingBar.Small"
             android:layout_height="wrap_content"
-            android:layout_marginStart="8dp"
+            android:layout_marginStart="@dimen/dimen_common_small"
             android:text="Université Nazi Boni"
-            cardView:layout_constraintBottom_toTopOf="@+id/item_filiere_series_lbl"
-            cardView:layout_constraintEnd_toEndOf="parent"
-            cardView:layout_constraintStart_toStartOf="parent"
-            cardView:layout_constraintTop_toBottomOf="@+id/item_filiere_ufr_lbl" />
+            android:textAppearance="?attr/textAppearanceBodySmall"
+            app:layout_constraintBottom_toTopOf="@+id/item_filiere_series_lbl"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/item_filiere_ufr_lbl" />
 
         <TextView
             android:id="@+id/item_filiere_series_lbl"
-            style="@style/TextAppearance.Material3.BodySmall"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginStart="8dp"
-            android:layout_marginEnd="8dp"
+            android:layout_marginStart="@dimen/dimen_common_small"
+            android:layout_marginEnd="@dimen/dimen_common_small"
             android:text="The MaterialMe app is a mock sports-news app with very poor design implementation. You will fix it up to meet the design guidelines to create a delightful user experience! Below are screenshots of the app before and after the Material Design improvements."
-            cardView:layout_constraintBottom_toTopOf="@id/item_filiere_divider_bottom_lbl"
-            cardView:layout_constraintEnd_toEndOf="parent"
-            cardView:layout_constraintStart_toStartOf="parent" />
+            android:textAppearance="?attr/textAppearanceBodySmall"
+            app:layout_constraintBottom_toTopOf="@id/item_filiere_divider_bottom_lbl"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
 
         <TextView
             android:id="@+id/item_filiere_places_restantes_lbl"
-            style="@style/TextAppearance.Material3.LabelSmall"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginEnd="8dp"
+            android:layout_marginEnd="@dimen/dimen_common_small"
             android:text="5 de places restantes."
-            cardView:layout_constraintEnd_toEndOf="parent"
-            cardView:layout_constraintTop_toBottomOf="@+id/item_filiere_series_lbl" />
+            android:textAppearance="?attr/textAppearanceBodySmall"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/item_filiere_series_lbl" />
 
-        <View
+        <com.google.android.material.divider.MaterialDivider
             android:id="@+id/item_filiere_divider_bottom_lbl"
-            android:layout_width="match_parent"
-            android:layout_height="1dp"
-            android:background="?android:attr/listDivider"
-            cardView:layout_constraintBottom_toTopOf="@+id/item_filiere_places_restantes_lbl"
-            cardView:layout_constraintEnd_toEndOf="parent"
-            cardView:layout_constraintStart_toStartOf="parent" />
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="8dp"
+            app:layout_constraintBottom_toTopOf="@+id/item_filiere_places_restantes_lbl"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="@+id/item_filiere_places_restantes_lbl" />
 
+        <!-- <com.google.android.material.divider.MaterialDivider
+            android:id="@+id/item_filiere_ufr_details_divider_bottom_lbl"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            app:dividerInsetStart="@dimen/dimen_common_small"
+            app:dividerInsetEnd="@dimen/dimen_common_small"
+            app:layout_constraintBottom_toTopOf="@+id/item_filiere_series_lbl"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
+-->
     </androidx.constraintlayout.widget.ConstraintLayout>
 
-</androidx.cardview.widget.CardView>
+</com.google.android.material.card.MaterialCardView>

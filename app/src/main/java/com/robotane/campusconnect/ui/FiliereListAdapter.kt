@@ -30,8 +30,10 @@ class FiliereListAdapter : ListAdapter<Filiere, FiliereListAdapter.FiliereViewHo
 
         fun bind(filiere: Filiere?) {
             filiereNomView.text = filiere?.nom
-            ufrView.text = filiere?.ufr
-            universiteView.text = filiere?.nomUniversite
+
+            ufrView.text = filiere?.ufr?.split(" - ")?.last() ?:filiere?.ufr
+
+            universiteView.text = filiere?.nomUniversite?.split(" - ")?.first() ?:filiere?.nomUniversite
 //            ufrView.text = ufrView.context.getString(R.string.filiereRcVUfrUniversite, filiere?.ufr, filiere?.nomUniversite)
             filiereSeries.text = "Séries autorisées: ${filiere?.series} ${if (filiere?.debouches != null) "\n\nDébouchés: ${filiere?.debouches}" else ""}"
 //            numberview.text = filiere?.id.toString()

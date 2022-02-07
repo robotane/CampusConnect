@@ -1,4 +1,16 @@
 <resources>
     <string name="app_name">CampusConnect</string>
     <string name="filiereRcVUfrUniversite">%1s %2s</string>
+    <string name="serie_du_bac">Série du BAC</string>
+    <string name="moyenne_du_bac">Moyenne du BAC</string>
+    <string name="filieres_souhaitees">Filières souhaitées</string>
+    <string name="villes_de_preference">Villes de préference</string>
+    <string name="chercher">Chercher</string>
+    <string name="rechercher_une_formation">Rechercher une formation</string>
+    <string name="university_status_label">Type d\'université:</string>
+    <string name="university_status_private">Privée</string>
+    <string name="university_status_public">Publique</string>
+    <string name="search_formation_city_input_helper_text">Vous pouvez choisir jusqu\'à 10 villes</string>
+    <string name="search_formation_formation_input_helper_text">Vous pouvez entrez des mots clés sur la filire, Par exemple: biologie, mathematiques</string>
+    <string name="university_status_all">Toutes</string>
 </resources>

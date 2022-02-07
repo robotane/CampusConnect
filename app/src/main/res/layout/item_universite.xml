@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:cardView="http://schemas.android.com/apk/res-auto"
+<com.google.android.material.card.MaterialCardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/item_universite_carView"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_margin="8dp"
-    cardView:cardCornerRadius="8dp"
-    cardView:cardElevation="5dp">
+    style="?attr/materialCardViewElevatedStyle"
+    android:layout_margin="@dimen/dimen_common_small"
+    app:shapeAppearance="@style/ShapeAppearance.App.MediumComponent">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
@@ -16,30 +16,30 @@
             android:id="@+id/item_universite_constraintLayout"
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            style="@style/text_title"
-            cardView:layout_constraintEnd_toEndOf="parent"
-            cardView:layout_constraintStart_toStartOf="parent"
-            cardView:layout_constraintTop_toTopOf="parent">
+            android:background="@color/colorPrimary"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
 
             <ImageView
                 android:id="@+id/item_universite_ic"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                cardView:layout_constraintBottom_toBottomOf="@+id/item_universite_name_lbl"
-                cardView:layout_constraintStart_toStartOf="parent"
-                cardView:layout_constraintTop_toTopOf="parent"
-                cardView:srcCompat="@android:drawable/ic_menu_report_image" />
+                app:layout_constraintBottom_toBottomOf="@+id/item_universite_name_lbl"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:srcCompat="@android:drawable/ic_menu_report_image" />
 
             <TextView
                 android:id="@+id/item_universite_name_lbl"
                 style="@style/TextAppearance.AppCompat.Headline"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="4dp"
-                android:layout_marginTop="4dp"
+                android:layout_marginStart="@dimen/dimen_common_very_small"
+                android:layout_marginTop="@dimen/dimen_common_very_small"
                 android:text="Université Nazi Boni"
-                cardView:layout_constraintStart_toEndOf="@+id/item_universite_ic"
-                cardView:layout_constraintTop_toTopOf="parent" />
+                app:layout_constraintStart_toEndOf="@+id/item_universite_ic"
+                app:layout_constraintTop_toTopOf="parent" />
 
             <TextView
                 android:id="@+id/item_universite_status_lbl"
@@ -48,19 +48,19 @@
                 android:layout_height="wrap_content"
                 android:text="Publique"
                 android:textColor="?android:textColorSecondary"
-                cardView:layout_constraintBottom_toBottomOf="parent"
-                cardView:layout_constraintStart_toStartOf="@+id/item_universite_name_lbl"
-                cardView:layout_constraintTop_toBottomOf="@+id/item_universite_name_lbl" />
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="@+id/item_universite_name_lbl"
+                app:layout_constraintTop_toBottomOf="@+id/item_universite_name_lbl" />
 
             <RatingBar
                 android:id="@+id/item_universite_rating"
                 style="@style/Widget.AppCompat.RatingBar.Small"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="8dp"
-                cardView:layout_constraintBottom_toBottomOf="parent"
-                cardView:layout_constraintStart_toEndOf="@+id/item_universite_status_lbl"
-                cardView:layout_constraintTop_toBottomOf="@+id/item_universite_name_lbl" />
+                android:layout_marginStart="@dimen/dimen_common_small"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/item_universite_status_lbl"
+                app:layout_constraintTop_toBottomOf="@+id/item_universite_name_lbl" />
 
 
         </androidx.constraintlayout.widget.ConstraintLayout>
@@ -70,12 +70,12 @@
             style="@style/TextAppearance.AppCompat.Subhead"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:padding="4dp"
+            android:padding="@dimen/dimen_common_very_small"
             android:text="The MaterialMe app is a mock sports-news app with very poor design implementation. You will fix it up to meet the design guidelines to create a delightful user experience! Below are screenshots of the app before and after the Material Design improvements."
-            cardView:layout_constraintBottom_toBottomOf="parent"
-            cardView:layout_constraintEnd_toEndOf="parent"
-            cardView:layout_constraintStart_toStartOf="parent"
-            cardView:layout_constraintTop_toBottomOf="@+id/item_universite_constraintLayout" />
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/item_universite_constraintLayout" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 
-</androidx.cardview.widget.CardView>
+</com.google.android.material.card.MaterialCardView>

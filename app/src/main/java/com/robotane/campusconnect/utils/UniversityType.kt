@@ -1,0 +1,10 @@
+package com.robotane.campusconnect.utils
+
+import androidx.annotation.IdRes
+import com.robotane.campusconnect.R
+
+enum class UniversityType(@IdRes val itemID: Int) {
+    ANY(R.id.fragment_search_formation_all_university_rdbtn),
+    PUBLIC(R.id.fragment_search_formation_public_university_rdbtn),
+    PRIVATE(R.id.fragment_search_formation_private_university_rdbtn)
+}
