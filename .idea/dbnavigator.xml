@@ -24,24 +24,18 @@
     <autoscroll-to-editor value="false" />
     <autoscroll-from-editor value="true" />
     <show-object-properties value="true" />
-    <loaded-nodes>
-      <connection connection-id="ae8e1372-af07-442f-865c-35f876c29176">
-        <schema name="main" object-types="table, view, column" />
-      </connection>
-    </loaded-nodes>
+    <loaded-nodes />
   </component>
   <component name="DBNavigator.Project.DatabaseConsoleManager">
     <connection id="ae8e1372-af07-442f-865c-35f876c29176">
-      <console name="Connection" type="STANDARD" schema="main" session="Pool"><![CDATA[SELECT * FROM filiere WHERE nom LIKE '%dévelo%']]></console>
+      <console name="Connection" type="STANDARD" schema="" session="Main" />
     </connection>
   </component>
   <component name="DBNavigator.Project.DatabaseFileManager">
     <open-files />
   </component>
   <component name="DBNavigator.Project.DatabaseSessionManager">
-    <connection id="ae8e1372-af07-442f-865c-35f876c29176">
-      <session name="Session 1" id="2a4bcff9-e7aa-4c0c-bb32-cba77f9d6608" />
-    </connection>
+    <connection id="ae8e1372-af07-442f-865c-35f876c29176" />
   </component>
   <component name="DBNavigator.Project.EditorStateManager">
     <last-used-providers />

@@ -10,7 +10,8 @@ import com.robotane.campusconnect.R
 import com.robotane.campusconnect.data.Filiere
 import com.robotane.campusconnect.databinding.ItemFiliereBinding
 
-class FiliereListAdapter : ListAdapter<Filiere, FiliereListAdapter.FiliereViewHolder>(FilieresComparator()) {
+class FiliereListAdapter :
+    ListAdapter<Filiere, FiliereListAdapter.FiliereViewHolder>(FilieresComparator()) {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): FiliereViewHolder {
         return FiliereViewHolder(parent)
@@ -24,10 +25,12 @@ class FiliereListAdapter : ListAdapter<Filiere, FiliereListAdapter.FiliereViewHo
     class FiliereViewHolder(
         private val parent: ViewGroup,
         private val binding: ItemFiliereBinding = DataBindingUtil.inflate(
-                                LayoutInflater.from(parent.context),
-                                R.layout.item_filiere,
-                                parent,
-                                false)) : RecyclerView.ViewHolder(binding.root) {
+            LayoutInflater.from(parent.context),
+            R.layout.item_filiere,
+            parent,
+            false
+        )
+    ) : RecyclerView.ViewHolder(binding.root) {
 
         fun bind(filiere: Filiere?) {
             binding.formation = filiere

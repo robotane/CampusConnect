@@ -6,7 +6,7 @@ import com.robotane.campusconnect.data.FiliereRepository
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
-class FiliereViewModel(private val repository: FiliereRepository):ViewModel() {
+class FiliereViewModel(private val repository: FiliereRepository) : ViewModel() {
     // Using LiveData and caching what allWords returns has several benefits:
     // - We can put an observer on the data (instead of polling for changes) and only update the
     //   the UI when the data actually changes.
@@ -33,7 +33,8 @@ class FiliereViewModel(private val repository: FiliereRepository):ViewModel() {
 
 }
 
-class FiliereViewModelFactory(private val repository: FiliereRepository) : ViewModelProvider.Factory {
+class FiliereViewModelFactory(private val repository: FiliereRepository) :
+    ViewModelProvider.Factory {
     override fun <T : ViewModel> create(modelClass: Class<T>): T {
         if (modelClass.isAssignableFrom(FiliereViewModel::class.java)) {
             @Suppress("UNCHECKED_CAST")

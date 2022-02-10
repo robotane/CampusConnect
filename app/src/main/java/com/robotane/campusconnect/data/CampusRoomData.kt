@@ -21,16 +21,16 @@ abstract class CampusRoomData : RoomDatabase() {
             // if it is, then create the database
             return INSTANCE ?: synchronized(this) {
                 val instance = Room.databaseBuilder(
-                        context.applicationContext,
-                        CampusRoomData::class.java,
-                        "campus.db"
-                    ).createFromAsset("db_campus_faso.db")
+                    context.applicationContext,
+                    CampusRoomData::class.java,
+                    "campus.db"
+                ).createFromAsset("db_campus_faso.db")
                     .build()
                 INSTANCE = instance
                 // return instance
                 instance
             }
         }
-   }
+    }
 
 }

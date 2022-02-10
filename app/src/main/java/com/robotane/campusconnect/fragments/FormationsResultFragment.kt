@@ -17,7 +17,7 @@ import com.robotane.campusconnect.ui.FiliereViewModelFactory
 import com.robotane.campusconnect.utils.Constants
 import com.robotane.campusconnect.utils.UniversityType
 
-class FormationsResultFragment: Fragment() {
+class FormationsResultFragment : Fragment() {
 
     private lateinit var binding: FragmentFormationsResultBinding
     private val viewModel: FiliereViewModel by activityViewModels {
@@ -33,7 +33,8 @@ class FormationsResultFragment: Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        binding = DataBindingUtil.inflate(inflater, R.layout.fragment_formations_result, container, false)
+        binding =
+            DataBindingUtil.inflate(inflater, R.layout.fragment_formations_result, container, false)
 
         binding.lifecycleOwner = viewLifecycleOwner
 
@@ -45,7 +46,8 @@ class FormationsResultFragment: Fragment() {
 
         val intent = activity?.intent
         val bacType = intent?.getStringExtra(Constants.BAC_TYPE)
-        val universityType = intent?.getSerializableExtra(Constants.UNIVERSITY_TYPE) as UniversityType?
+        val universityType =
+            intent?.getSerializableExtra(Constants.UNIVERSITY_TYPE) as UniversityType?
         val formations = intent?.getStringExtra(Constants.FORMATIONS)
         val towns = intent?.getStringExtra(Constants.TOWNS)
 

@@ -11,15 +11,10 @@ import com.robotane.campusconnect.R
 import com.robotane.campusconnect.databinding.FragmentSearchFormationBinding
 import com.robotane.campusconnect.ui.FormationsSearchViewModel
 
-class SearchFormationsFragment: Fragment(){
+class SearchFormationsFragment : Fragment() {
 
     private lateinit var binding: FragmentSearchFormationBinding
-/*    private val viewModel: FormationsSearchViewModel by viewModels {
-        FormationsSearchViewModelFactory(this, arguments)
-    }*/
     val viewModel: FormationsSearchViewModel by viewModels()
-
-//    private lateinit var viewModel: FormationsSearchViewModel
 
     companion object {
         fun newInstance() = SearchFormationsFragment()
@@ -29,29 +24,14 @@ class SearchFormationsFragment: Fragment(){
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        binding = DataBindingUtil.inflate(inflater, R.layout.fragment_search_formation, container, false)
-
+        binding =
+            DataBindingUtil.inflate(inflater, R.layout.fragment_search_formation, container, false)
         binding.lifecycleOwner = viewLifecycleOwner
-
         return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
-//        viewModel = ViewModelProvider(this)[FormationsSearchViewModel::class.java]
         binding.viewmodel = viewModel
-
-/*        //Set onClickListener the search button
-        binding.fragmentSearchFormationSearchBtn
-            .setOnClickListener{
-                val intent = Intent(activity, FormationsResultActivity::class.java)
-                intent.putExtra(Constants.BAC_TYPE, viewModel.bacType.value)
-                intent.putExtra(Constants.FORMATIONS, viewModel.formation.value)
-                intent.putExtra(Constants.TOWNS, viewModel.towns.value)
-                intent.putExtra(Constants.UNIVERSITY_TYPE,
-                    viewModel.universityType.value?.let { UniversityType.getByItemID(it) })
-                startActivity(intent)
-            }*/
     }
 }
