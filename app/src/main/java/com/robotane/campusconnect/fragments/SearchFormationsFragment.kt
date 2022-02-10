@@ -7,37 +7,52 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
 import android.widget.RadioGroup
+import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.activityViewModels
+import androidx.lifecycle.ViewModelProvider
+import androidx.lifecycle.ViewModelProviders
 import com.google.android.material.textfield.TextInputLayout
 import com.robotane.campusconnect.FormationsResultActivity
 import com.robotane.campusconnect.R
+import com.robotane.campusconnect.databinding.FragmentSearchFormationBinding
+import com.robotane.campusconnect.ui.*
 import com.robotane.campusconnect.utils.Constants
 import com.robotane.campusconnect.utils.UniversityType
 
 class SearchFormationsFragment: Fragment(){
+
+    private lateinit var binding: FragmentSearchFormationBinding
+/*    private val viewModel: FormationsSearchPayloadViewModel by activityViewModels {
+        FormationsSearchPayloadViewModelFactory()
+    }*/
+    private lateinit var viewModel: FormationsSearchPayloadViewModel
 
     companion object {
         fun newInstance() = SearchFormationsFragment()
     }
 
     override fun onCreateView(
-        inflater: LayoutInflater,
-        container: ViewGroup?,
+        inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
+        binding = DataBindingUtil.inflate(inflater, R.layout.fragment_search_formation, container, false)
 
-        //Inflate the layout of MainFragment
-        val result = inflater.inflate(R.layout.fragment_search_formation, container, false)
-        val bacTypeInput = result.findViewById<TextInputLayout>(R.id.fragment_search_formation_serie_bac)
-        val formationsInput = result.findViewById<TextInputLayout>(R.id.fragment_search_formation_filieres)
-        val townsInput = result.findViewById<TextInputLayout>(R.id.fragment_search_formation_villes)
-        val universityTypeRadioGroup = result.findViewById<RadioGroup>(R.id.fragment_search_formation_university_status_rdbtn_group)
+        binding.lifecycleOwner = viewLifecycleOwner
+
+        return binding.root
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+
+        viewModel = ViewModelProvider(this).get(FormationsSearchPayloadViewModel::class.java)
 
         //Set onClickListener the search button
 
-        result.findViewById<Button>(R.id.fragment_search_formation_search_btn)
+        binding.fragmentSearchFormationSearchBtn
             .setOnClickListener{
-                val universityType = when (universityTypeRadioGroup.checkedRadioButtonId){
+                val universityType = when (binding.fragmentSearchFormationUniversityStatusRdbtnGroup.checkedRadioButtonId){
                     R.id.fragment_search_formation_all_university_rdbtn -> UniversityType.ANY
 
                     R.id.fragment_search_formation_private_university_rdbtn -> UniversityType.PRIVATE
@@ -47,12 +62,11 @@ class SearchFormationsFragment: Fragment(){
                     else -> UniversityType.ANY
                 }
                 val intent = Intent(activity, FormationsResultActivity::class.java)
-                intent.putExtra(Constants.BAC_TYPE, bacTypeInput.editText?.text.toString())
-                intent.putExtra(Constants.FORMATIONS, formationsInput.editText?.text.toString())
-                intent.putExtra(Constants.TOWNS, townsInput.editText?.text.toString())
+                intent.putExtra(Constants.BAC_TYPE, binding.fragmentSearchFormationSerieBac.editText?.text.toString())
+                intent.putExtra(Constants.FORMATIONS, binding.fragmentSearchFormationFilieres.editText?.text.toString())
+                intent.putExtra(Constants.TOWNS, binding.fragmentSearchFormationVilles.editText?.text.toString())
                 intent.putExtra(Constants.UNIVERSITY_TYPE, universityType)
                 startActivity(intent)
             }
-        return result
     }
 }

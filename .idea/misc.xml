@@ -13,9 +13,10 @@
         <entry key="app/src/main/res/layout/activity_formations_detail.xml" value="0.15896739130434784" />
         <entry key="app/src/main/res/layout/activity_main.xml" value="0.26519337016574585" />
         <entry key="app/src/main/res/layout/fragment_filiere_result.xml" value="0.5" />
+        <entry key="app/src/main/res/layout/fragment_formations_result.xml" value="0.16367521367521368" />
         <entry key="app/src/main/res/layout/fragment_search_formation.xml" value="0.33" />
         <entry key="app/src/main/res/layout/item_auto_complete_input.xml" value="0.15896739130434784" />
-        <entry key="app/src/main/res/layout/item_filiere.xml" value="0.6872536136662286" />
+        <entry key="app/src/main/res/layout/item_filiere.xml" value="0.1" />
         <entry key="app/src/main/res/layout/item_universite.xml" value="0.75" />
         <entry key="app/src/main/res/layout/listview_filiere_item.xml" value="0.67" />
         <entry key="app/src/main/res/layout/listview_universite_item.xml" value="0.23892100192678228" />
