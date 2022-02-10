@@ -6,8 +6,7 @@
     <data>
         <variable
             name="viewmodel"
-            type="com.robotane.campusconnect.ui.FormationsSearchPayloadViewModel" />
-
+            type="com.robotane.campusconnect.ui.FormationsSearchViewModel" />
     </data>
 
     <com.google.android.material.card.MaterialCardView
@@ -43,6 +42,7 @@
                 <com.google.android.material.textfield.MaterialAutoCompleteTextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:text="@={viewmodel.bacType}"
                     android:inputType="textAutoComplete" />
 
             </com.google.android.material.textfield.TextInputLayout>
@@ -73,6 +73,7 @@
                 <com.google.android.material.textfield.MaterialAutoCompleteTextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:text="@={viewmodel.formation}"
                     android:inputType="textAutoComplete" />
             </com.google.android.material.textfield.TextInputLayout>
 
@@ -89,6 +90,7 @@
 
                 <com.google.android.material.textfield.MaterialAutoCompleteTextView
                     android:layout_width="match_parent"
+                    android:text="@={viewmodel.towns}"
                     android:layout_height="wrap_content"
                     android:inputType="textAutoComplete" />
 
@@ -116,7 +118,7 @@
                     android:id="@+id/fragment_search_formation_university_status_rdbtn_group"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:checkedButton="@id/fragment_search_formation_all_university_rdbtn"
+                    android:checkedButton="@={viewmodel.universityType}"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintStart_toEndOf="@+id/fragment_search_formation_university_status_label"
                     app:layout_constraintTop_toTopOf="parent">
@@ -146,6 +148,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="@string/chercher"
+                android:onClick="@{viewmodel::onSearchButtonClick}"
                 app:icon="?android:attr/actionModeWebSearchDrawable"
                 app:iconGravity="textStart" />
 

@@ -1,32 +1,25 @@
 package com.robotane.campusconnect.fragments
 
-import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Button
-import android.widget.RadioGroup
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.activityViewModels
-import androidx.lifecycle.ViewModelProvider
-import androidx.lifecycle.ViewModelProviders
-import com.google.android.material.textfield.TextInputLayout
-import com.robotane.campusconnect.FormationsResultActivity
+import androidx.fragment.app.viewModels
 import com.robotane.campusconnect.R
 import com.robotane.campusconnect.databinding.FragmentSearchFormationBinding
-import com.robotane.campusconnect.ui.*
-import com.robotane.campusconnect.utils.Constants
-import com.robotane.campusconnect.utils.UniversityType
+import com.robotane.campusconnect.ui.FormationsSearchViewModel
 
 class SearchFormationsFragment: Fragment(){
 
     private lateinit var binding: FragmentSearchFormationBinding
-/*    private val viewModel: FormationsSearchPayloadViewModel by activityViewModels {
-        FormationsSearchPayloadViewModelFactory()
+/*    private val viewModel: FormationsSearchViewModel by viewModels {
+        FormationsSearchViewModelFactory(this, arguments)
     }*/
-    private lateinit var viewModel: FormationsSearchPayloadViewModel
+    val viewModel: FormationsSearchViewModel by viewModels()
+
+//    private lateinit var viewModel: FormationsSearchViewModel
 
     companion object {
         fun newInstance() = SearchFormationsFragment()
@@ -46,27 +39,19 @@ class SearchFormationsFragment: Fragment(){
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        viewModel = ViewModelProvider(this).get(FormationsSearchPayloadViewModel::class.java)
+//        viewModel = ViewModelProvider(this)[FormationsSearchViewModel::class.java]
+        binding.viewmodel = viewModel
 
-        //Set onClickListener the search button
-
+/*        //Set onClickListener the search button
         binding.fragmentSearchFormationSearchBtn
             .setOnClickListener{
-                val universityType = when (binding.fragmentSearchFormationUniversityStatusRdbtnGroup.checkedRadioButtonId){
-                    R.id.fragment_search_formation_all_university_rdbtn -> UniversityType.ANY
-
-                    R.id.fragment_search_formation_private_university_rdbtn -> UniversityType.PRIVATE
-
-                    R.id.fragment_search_formation_public_university_rdbtn -> UniversityType.PUBLIC
-
-                    else -> UniversityType.ANY
-                }
                 val intent = Intent(activity, FormationsResultActivity::class.java)
-                intent.putExtra(Constants.BAC_TYPE, binding.fragmentSearchFormationSerieBac.editText?.text.toString())
-                intent.putExtra(Constants.FORMATIONS, binding.fragmentSearchFormationFilieres.editText?.text.toString())
-                intent.putExtra(Constants.TOWNS, binding.fragmentSearchFormationVilles.editText?.text.toString())
-                intent.putExtra(Constants.UNIVERSITY_TYPE, universityType)
+                intent.putExtra(Constants.BAC_TYPE, viewModel.bacType.value)
+                intent.putExtra(Constants.FORMATIONS, viewModel.formation.value)
+                intent.putExtra(Constants.TOWNS, viewModel.towns.value)
+                intent.putExtra(Constants.UNIVERSITY_TYPE,
+                    viewModel.universityType.value?.let { UniversityType.getByItemID(it) })
                 startActivity(intent)
-            }
+            }*/
     }
 }

@@ -8,7 +8,6 @@ import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.RecyclerView
 import com.robotane.campusconnect.R
 import com.robotane.campusconnect.databinding.FragmentFormationsResultBinding
 import com.robotane.campusconnect.ui.FiliereApplication
@@ -52,6 +51,8 @@ class FormationsResultFragment: Fragment() {
 
         val layoutManager = LinearLayoutManager(context)
 
+        println(universityType)
+
         val filiereListAdapter = FiliereListAdapter()
 
         viewModel.fetchFormationsByQuery(formations.toString())
@@ -65,25 +66,4 @@ class FormationsResultFragment: Fragment() {
         binding.recyclerview.adapter = filiereListAdapter
         binding.viewmodel = viewModel
     }
-
-    /*override fun onCreateView(
-        inflater: LayoutInflater,
-        container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
-        val inflate = inflater.inflate(R.layout.fragment_formations_result, container, false)
-
-
-        val recyclerView = inflate.findViewById<RecyclerView>(R.id.recyclerview)
-        val adapter = FiliereListAdapter()
-
-        filiereViewModel.allWords.observe(viewLifecycleOwner, { filieres ->
-            // Update the cached copy of the words in the adapter.
-            filieres?.let { adapter.submitList(it) }
-        })
-        recyclerView.adapter = adapter
-        recyclerView.layoutManager = LinearLayoutManager(context)
-        return inflate
-    }*/
-
 }

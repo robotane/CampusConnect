@@ -17,26 +17,16 @@ class FiliereViewModel(private val repository: FiliereRepository):ViewModel() {
 
     fun fetchFormationsByQuery(query: String) {
         // optional: add wildcards to the filter
-    val f = when {
-        query.isEmpty() -> "%"
-        else -> "%$query%"
-    }
+        val fQuery = when {
+            query.isBlank() -> "%"
+            else -> "%$query%"
+        }
         viewModelScope.launch(Dispatchers.IO) {
             try {
-                /*//1
-                withContext(Dispatchers.Main) {
-                    movieLoadingStateLiveData.value = MovieLoadingState.LOADING
-                }*/
-
-                val movies = repository.getAllFilieresByName(f)
-                searchFormationsLiveData.postValue(movies)
-/*
-                //2
-                movieLoadingStateLiveData.postValue(MovieLoadingState.LOADED)*/
+                val formations = repository.getAllFilieresByName(fQuery)
+                searchFormationsLiveData.postValue(formations)
             } catch (e: Exception) {
                 TODO("update the loading state")
-      /*          //3
-                movieLoadingStateLiveData.postValue(MovieLoadingState.INVALID_API_KEY)*/
             }
         }
     }
