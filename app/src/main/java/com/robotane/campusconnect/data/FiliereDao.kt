@@ -12,4 +12,8 @@ interface FiliereDao {
 
     @Query("SELECT * FROM filiere WHERE nom LIKE :name LIMIT 1")
     fun findByName(name: String): Filiere
+
+    @Query("SELECT * FROM filiere WHERE nom LIKE :name")
+    fun findsByName(name: String): List<Filiere>
+
 }

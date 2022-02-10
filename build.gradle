@@ -8,6 +8,7 @@ buildscript {
     dependencies {
         classpath "com.android.tools.build:gradle:7.0.4"
         classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:1.5.20"
+        classpath 'com.google.dagger:hilt-android-gradle-plugin:2.38.1'
 
         // NOTE: Do not place your application dependencies here; they belong
         // in the individual module build.gradle files
@@ -25,6 +26,7 @@ ext {
     materialVersion = '1.5.0'
     roomVersion = '2.3.0'
     pagingVersion="3.1.0"
+    hiltVersion = "2.38.1"
     // testing
     junitVersion = '4.13.2'
     espressoVersion = '3.4.0'
