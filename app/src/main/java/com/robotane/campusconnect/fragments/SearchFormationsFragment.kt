@@ -15,6 +15,7 @@ import com.robotane.campusconnect.databinding.FragmentSearchFormationBinding
 import com.robotane.campusconnect.ui.FiliereApplication
 import com.robotane.campusconnect.ui.FormationsSearchViewModel
 import com.robotane.campusconnect.ui.FormationsSearchViewModelFactory
+import me.zhanghai.android.fastscroll.FastScrollerBuilder
 
 class SearchFormationsFragment : Fragment() {
 

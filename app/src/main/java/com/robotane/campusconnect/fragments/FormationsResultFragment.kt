@@ -16,6 +16,7 @@ import com.robotane.campusconnect.ui.FiliereViewModel
 import com.robotane.campusconnect.ui.FiliereViewModelFactory
 import com.robotane.campusconnect.utils.Constants
 import com.robotane.campusconnect.utils.UniversityType
+import me.zhanghai.android.fastscroll.FastScrollerBuilder
 
 class FormationsResultFragment : Fragment() {
 
@@ -64,6 +65,8 @@ class FormationsResultFragment : Fragment() {
         binding.recyclerview.layoutManager = layoutManager
         binding.recyclerview.hasFixedSize()
         binding.recyclerview.adapter = filiereListAdapter
+
+        FastScrollerBuilder(binding.recyclerview).build()
         binding.viewmodel = viewModel
     }
 }

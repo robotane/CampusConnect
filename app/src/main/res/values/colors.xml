@@ -8,7 +8,7 @@
 
     <color name="colorPrimary">#4285F4</color>
     <color name="colorPrimaryDark">#3367D6</color>
-    <color name="colorAccent">#FFC400</color>
+    <color name="colorAccent">#4285F4</color>
 
     <!-- common colors -->
     <color name="transparent">#00000000</color>
