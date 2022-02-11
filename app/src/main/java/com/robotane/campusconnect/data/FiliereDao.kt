@@ -16,4 +16,7 @@ interface FiliereDao {
     @Query("SELECT * FROM filiere WHERE nom LIKE :name")
     fun findsByName(name: String): List<Filiere>
 
+    @Query("SELECT DISTINCT (filiere.series) FROM filiere")
+    fun findDistinctBacType(): Flow<List<String>>
+
 }

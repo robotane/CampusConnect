@@ -35,9 +35,7 @@ class FormationsResultFragment : Fragment() {
     ): View {
         binding =
             DataBindingUtil.inflate(inflater, R.layout.fragment_formations_result, container, false)
-
         binding.lifecycleOwner = viewLifecycleOwner
-
         return binding.root
     }
 
@@ -58,11 +56,11 @@ class FormationsResultFragment : Fragment() {
         val filiereListAdapter = FiliereListAdapter()
 
         viewModel.fetchFormationsByQuery(formations.toString())
-
         viewModel.searchFormationsLiveData.observe(viewLifecycleOwner, { filieres ->
             // Update the cached copy of the words in the adapter.
             filieres?.let { filiereListAdapter.submitList(it) }
         })
+
         binding.recyclerview.layoutManager = layoutManager
         binding.recyclerview.hasFixedSize()
         binding.recyclerview.adapter = filiereListAdapter

@@ -8,4 +8,6 @@ class FiliereRepository(private val filiereDao: FiliereDao) {
     fun getAllFilieresByName(name: String): List<Filiere> {
         return filiereDao.findsByName(name)
     }
+
+    val distinctBacType = filiereDao.findDistinctBacType()
 }
