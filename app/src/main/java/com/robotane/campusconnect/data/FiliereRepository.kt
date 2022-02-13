@@ -1,12 +1,12 @@
 package com.robotane.campusconnect.data
 
-import kotlinx.coroutines.flow.Flow
+import androidx.sqlite.db.SimpleSQLiteQuery
 
 class FiliereRepository(private val filiereDao: FiliereDao) {
-    val allFilieres = filiereDao.getAll()
+    val allFilieres = filiereDao.getAllDetails()
 
-    fun getAllFilieresByName(name: String): List<Filiere> {
-        return filiereDao.findsByName(name)
+    fun getAllFilieresByName(query: SimpleSQLiteQuery): List<FiliereOverviewModel> {
+        return filiereDao.findsByName(query)
     }
 
     val distinctBacType = filiereDao.findDistinctBacType()

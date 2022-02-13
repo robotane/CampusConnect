@@ -10,10 +10,7 @@ import androidx.fragment.app.activityViewModels
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.robotane.campusconnect.R
 import com.robotane.campusconnect.databinding.FragmentFormationsResultBinding
-import com.robotane.campusconnect.ui.FiliereApplication
-import com.robotane.campusconnect.ui.FiliereListAdapter
-import com.robotane.campusconnect.ui.FiliereViewModel
-import com.robotane.campusconnect.ui.FiliereViewModelFactory
+import com.robotane.campusconnect.ui.*
 import com.robotane.campusconnect.utils.Constants
 import com.robotane.campusconnect.utils.UniversityType
 import me.zhanghai.android.fastscroll.FastScrollerBuilder
@@ -52,11 +49,9 @@ class FormationsResultFragment : Fragment() {
 
         val layoutManager = LinearLayoutManager(context)
 
-        println(universityType)
-
         val filiereListAdapter = FiliereListAdapter()
 
-        viewModel.fetchFormationsByQuery(formations.toString())
+        viewModel.fetchFormationsByQuery(bacType, formations, towns, universityType)
         viewModel.searchFormationsLiveData.observe(viewLifecycleOwner, { filieres ->
             // Update the cached copy of the words in the adapter.
             filieres?.let { filiereListAdapter.submitList(it) }

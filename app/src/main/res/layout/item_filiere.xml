@@ -6,7 +6,7 @@
     <data>
         <variable
             name="formation"
-            type="com.robotane.campusconnect.data.Filiere" />
+            type="com.robotane.campusconnect.data.FiliereOverviewModel" />
     </data>
 
     <com.google.android.material.card.MaterialCardView
@@ -100,7 +100,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginEnd="@dimen/dimen_common_small"
-                android:text='@{formation.placesRestantes + " places restantes."}'
+                android:text='@{formation.placesRestantes + " places restantes sur " +formation.placeTotal+"."}'
                 tools:text="5 places restantes."
                 android:textAppearance="?attr/textAppearanceBodySmall"
                 app:layout_constraintEnd_toEndOf="parent"

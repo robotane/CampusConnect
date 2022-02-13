@@ -14,10 +14,14 @@ class FormationsSearchViewModel(
     private val savedStateHandle: SavedStateHandle,
     private val repository: FiliereRepository
 ) : ViewModel() {
-
+/*    val searchQueryModel = FormationSearchQueryModel(
+    savedStateHandle.getLiveData(Constants.UNIVERSITY_TYPE, UniversityType.ANY.itemId),
+    savedStateHandle.getLiveData(Constants.FORMATIONS, ""),
+    savedStateHandle.getLiveData(Constants.TOWNS, ""),
+    savedStateHandle.getLiveData(Constants.BAC_TYPE, ""),
+    )*/
     // The ViewModel properties observe directly the values stored in the StateHandler, so, changes are bidirectional
-    val universityType =
-        savedStateHandle.getLiveData(Constants.UNIVERSITY_TYPE, UniversityType.ANY.itemId)
+    val universityType = savedStateHandle.getLiveData(Constants.UNIVERSITY_TYPE, UniversityType.ANY.itemId)
     val formation = savedStateHandle.getLiveData(Constants.FORMATIONS, "")
     val towns = savedStateHandle.getLiveData(Constants.TOWNS, "")
     val bacType = savedStateHandle.getLiveData(Constants.BAC_TYPE, "")

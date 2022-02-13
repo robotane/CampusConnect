@@ -8,6 +8,13 @@ enum class UniversityType(@IdRes val itemId: Int) {
     PUBLIC(R.id.fragment_search_formation_public_university_rdbtn),
     PRIVATE(R.id.fragment_search_formation_private_university_rdbtn);
 
+    fun getDBName(): String{
+        return when(itemId){
+            PRIVATE.itemId -> "Privé"
+            PUBLIC.itemId -> "Public"
+            else -> "%"
+        }
+    }
     companion object {
         fun getByItemID(itemId: Int) = values().firstOrNull { it.itemId == itemId }
     }

@@ -6,7 +6,7 @@ import androidx.room.Room
 import androidx.room.RoomDatabase
 
 
-@Database(entities = [Filiere::class], version = 1)
+@Database(entities = [Filiere::class, Universite::class], version = 1)
 abstract class CampusRoomData : RoomDatabase() {
     abstract fun filiereDao(): FiliereDao
 
@@ -24,7 +24,8 @@ abstract class CampusRoomData : RoomDatabase() {
                     context.applicationContext,
                     CampusRoomData::class.java,
                     "campus.db"
-                ).createFromAsset("db_campus_faso.db")
+                ).fallbackToDestructiveMigration()
+                    .createFromAsset("db_campus_faso.db")
                     .build()
                 INSTANCE = instance
                 // return instance

@@ -32,14 +32,16 @@
   </component>
   <component name="DBNavigator.Project.DatabaseConsoleManager">
     <connection id="ae8e1372-af07-442f-865c-35f876c29176">
-      <console name="Connection" type="STANDARD" schema="main" session="Main"><![CDATA[select nom from filiere]]></console>
+      <console name="Connection" type="STANDARD" schema="main" session="Main"><![CDATA[SELECT f.id, u.nom AS nomUniversite, f.ufr, f.nom, f.series, f.place_total as placeTotal, f.places_restantes as placesRestantes, f.debouches FROM filiere f JOIN universite u ON f.id_universite = u.id WHERE f.normalized_nom LIKE '%economie%' AND u.status LIKE '%%%' AND (f.series like '%G2%') AND u.normalized_ville]]></console>
     </connection>
     <connection id="27444e7b-9efa-4e85-b406-feeef956c11f">
       <console name="Connection 1" type="STANDARD" schema="main" session="Main" />
     </connection>
   </component>
   <component name="DBNavigator.Project.DatabaseFileManager">
-    <open-files />
+    <open-files>
+      <object connection-id="ae8e1372-af07-442f-865c-35f876c29176" object-ref="consoles/Connection" />
+    </open-files>
   </component>
   <component name="DBNavigator.Project.DatabaseSessionManager">
     <connection id="ae8e1372-af07-442f-865c-35f876c29176" />

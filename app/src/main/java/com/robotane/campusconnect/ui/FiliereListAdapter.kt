@@ -7,11 +7,11 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.robotane.campusconnect.R
-import com.robotane.campusconnect.data.Filiere
+import com.robotane.campusconnect.data.FiliereOverviewModel
 import com.robotane.campusconnect.databinding.ItemFiliereBinding
 
 class FiliereListAdapter :
-    ListAdapter<Filiere, FiliereListAdapter.FiliereViewHolder>(FilieresComparator()) {
+    ListAdapter<FiliereOverviewModel, FiliereListAdapter.FiliereViewHolder>(FilieresComparator()) {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): FiliereViewHolder {
         return FiliereViewHolder(parent)
@@ -32,18 +32,18 @@ class FiliereListAdapter :
         )
     ) : RecyclerView.ViewHolder(binding.root) {
 
-        fun bind(filiere: Filiere?) {
+        fun bind(filiere: FiliereOverviewModel?) {
             binding.formation = filiere
         }
     }
 
-    class FilieresComparator : DiffUtil.ItemCallback<Filiere>() {
-        override fun areItemsTheSame(oldItem: Filiere, newItem: Filiere): Boolean {
+    class FilieresComparator : DiffUtil.ItemCallback<FiliereOverviewModel>() {
+        override fun areItemsTheSame(oldItem: FiliereOverviewModel, newItem: FiliereOverviewModel): Boolean {
             return oldItem === newItem
         }
 
-        override fun areContentsTheSame(oldItem: Filiere, newItem: Filiere): Boolean {
-            return oldItem.nom == newItem.nom && oldItem.nomUniversite == newItem.nomUniversite
+        override fun areContentsTheSame(oldItem: FiliereOverviewModel, newItem: FiliereOverviewModel): Boolean {
+            return oldItem.id == newItem.id
         }
     }
 }
