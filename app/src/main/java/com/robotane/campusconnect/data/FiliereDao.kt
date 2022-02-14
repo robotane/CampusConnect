@@ -18,11 +18,13 @@ interface FiliereDao {
     @Query("SELECT * FROM filiere WHERE nom LIKE :name LIMIT 1")
     fun findByName(name: String): Filiere
 
-
     @RawQuery
-    fun findsByName(query: SimpleSQLiteQuery): List<FiliereOverviewModel>
+    fun findsFormationsOverview(query: SimpleSQLiteQuery): List<FiliereOverviewModel>
 
-    @Query("SELECT DISTINCT (filiere.series) FROM filiere")
+    @Query("SELECT DISTINCT (series) FROM filiere")
     fun findDistinctBacType(): Flow<List<String>>
+
+    @Query("SELECT DISTINCT (ville) FROM universite")
+    fun findDistinctTowns(): Flow<List<String>>
 
 }

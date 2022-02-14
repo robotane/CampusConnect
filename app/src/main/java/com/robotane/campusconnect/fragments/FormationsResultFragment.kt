@@ -51,6 +51,7 @@ class FormationsResultFragment : Fragment() {
 
         val filiereListAdapter = FiliereListAdapter()
 
+
         viewModel.fetchFormationsByQuery(bacType, formations, towns, universityType)
         viewModel.searchFormationsLiveData.observe(viewLifecycleOwner, { filieres ->
             // Update the cached copy of the words in the adapter.

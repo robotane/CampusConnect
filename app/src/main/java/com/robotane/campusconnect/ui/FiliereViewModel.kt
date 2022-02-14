@@ -8,8 +8,8 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import java.util.regex.Pattern
 import androidx.sqlite.db.SimpleSQLiteQuery
-
-
+import com.robotane.campusconnect.utils.HelperFunctions
+import com.robotane.campusconnect.utils.HelperFunctions.Companion.stripAccents
 
 
 class FiliereViewModel(private val repository: FiliereRepository) : ViewModel() {
@@ -30,9 +30,23 @@ class FiliereViewModel(private val repository: FiliereRepository) : ViewModel() 
         var strQuery = "SELECT f.id, u.nom AS nom_universite, f.ufr, f.nom, f.series, f.place_total, f.places_restantes, f.debouches FROM filiere f JOIN universite u ON f.id_universite = u.id WHERE "
         val queryArgsList = ArrayList<String>()
 
-        strQuery += "f.normalized_nom LIKE ? AND ("
-        queryArgsList.add("%${formations}%") //TODO Normalize 'formation' as we are searching in a normalized column
+        strQuery += "("
+        formations?.let { NNFormations ->
+            stripAccents(NNFormations).lowercase().split(Pattern.compile("[, \t]")).forEach {
+                if (it.isNotBlank()) {
+                    strQuery += "f.normalized_nom LIKE ? OR "
+                    queryArgsList.add("%${it}%")
+                }
+            }
+        }
+        strQuery = strQuery.removeSuffix(" OR ") + ") "
+        if (strQuery.endsWith("() ")) {
+            strQuery.removeSuffix("() ")
+        }
+        else
+            strQuery += "AND "
 
+        strQuery += "("
         bacType?.split(Pattern.compile("[, \t]"))?.forEach {
             if (it.isNotBlank()) {
                 strQuery += "f.series LIKE ? OR "
@@ -40,24 +54,37 @@ class FiliereViewModel(private val repository: FiliereRepository) : ViewModel() 
             }
         }
         strQuery = strQuery.removeSuffix(" OR ") + ") "
+        if (strQuery.endsWith("() ")) {
+            strQuery.removeSuffix("() ")
+        }else
+            strQuery += "AND "
 
-        strQuery += "AND ("
-
-        towns?.split(Pattern.compile("[, \t]"))?.forEach {
-            if (it.isNotBlank()) {
-                strQuery += "u.normalized_ville LIKE ? OR "
-                queryArgsList.add("%${it}%")  //TODO Also normalize 'it'
+        strQuery += "("
+        towns?.let {NNTowns ->
+            stripAccents(NNTowns).lowercase().split(",").forEach {
+                if (it.isNotBlank()) {
+                    strQuery += "u.normalized_ville LIKE ? OR "
+                    queryArgsList.add("%${it.trim()}%")
+                }
             }
         }
         strQuery = strQuery.removeSuffix(" OR ") + ") "
-        strQuery += "AND u.status LIKE ?"
-        queryArgsList.add("%${universityType?.getDBName()}%")
-        strQuery = strQuery.replace("AND () ", "")
+
+        if (strQuery.endsWith("() ")) {
+            strQuery.removeSuffix("() ")
+        }
+        else
+             strQuery += "AND "
+        strQuery += "u.status LIKE ?"
+        queryArgsList.add("${universityType?.getDBName()}")
+
+        strQuery = strQuery.replace("AND () ", "").replace("() ", "")
         println(strQuery)
+        println(queryArgsList.toList())
         val query = SimpleSQLiteQuery(strQuery, queryArgsList.toArray())
         viewModelScope.launch(Dispatchers.IO) {
             try {
-                val findFormations = repository.getAllFilieresByName(query)
+                val findFormations = repository.findsFormationsOverview(query)
                 searchFormationsLiveData.postValue(findFormations)
             } catch (e: Exception) {
                 TODO("update the loading state")

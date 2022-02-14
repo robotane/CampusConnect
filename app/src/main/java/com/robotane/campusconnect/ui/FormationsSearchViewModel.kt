@@ -26,6 +26,7 @@ class FormationsSearchViewModel(
     val towns = savedStateHandle.getLiveData(Constants.TOWNS, "")
     val bacType = savedStateHandle.getLiveData(Constants.BAC_TYPE, "")
     var allBacType = MutableLiveData<List<String>>()
+    var allTowns = MutableLiveData<List<String>>()
 
     init {
         // Observe repository to retrieve all the bac type
@@ -33,6 +34,13 @@ class FormationsSearchViewModel(
             val distinctBT = ArrayList<String>()
             alBT.forEach { bT -> distinctBT += bT.split(",").map(String::trim) }
             allBacType.postValue(distinctBT.distinct())
+        }
+
+        // Observe repository to retrieve all the bac type
+        repository.findDistinctTowns.asLiveData().observeForever { alTW ->
+            val distinctTW = ArrayList<String>()
+            alTW.forEach { bT -> distinctTW += bT.split(",").map(String::trim) }
+            allTowns.postValue(distinctTW.distinct())
         }
     }
 

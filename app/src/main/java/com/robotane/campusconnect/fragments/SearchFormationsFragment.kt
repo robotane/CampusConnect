@@ -42,8 +42,15 @@ class SearchFormationsFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         viewModel.allBacType.observeForever{
-            val adapter  =  ArrayAdapter(requireContext(), R.layout.item_auto_complete_input, it)
+            val adapter  =  ArrayAdapter(requireContext(), R.layout.item_auto_complete_input, it.sorted())
             val textView = binding.fragmentSearchFormationSerieBac.editText as? MultiAutoCompleteTextView
+            textView?.setAdapter(adapter)
+            textView?.setTokenizer(MultiAutoCompleteTextView.CommaTokenizer())
+        }
+
+        viewModel.allTowns.observeForever{
+            val adapter  =  ArrayAdapter(requireContext(), R.layout.item_auto_complete_input, it.sorted())
+            val textView = binding.fragmentSearchFormationVilles.editText as? MultiAutoCompleteTextView
             textView?.setAdapter(adapter)
             textView?.setTokenizer(MultiAutoCompleteTextView.CommaTokenizer())
         }
