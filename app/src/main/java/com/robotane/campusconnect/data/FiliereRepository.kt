@@ -3,7 +3,9 @@ package com.robotane.campusconnect.data
 import androidx.sqlite.db.SimpleSQLiteQuery
 
 class FiliereRepository(private val filiereDao: FiliereDao) {
-    val allFilieres = filiereDao.getFormationsDetails()
+    fun getFormationDetails(id: Int): FiliereDetailModel {
+        return filiereDao.getFormationDetails(id)
+    }
 
     fun findsFormationsOverview(query: SimpleSQLiteQuery): List<FiliereOverviewModel> {
         return filiereDao.findsFormationsOverview(query)

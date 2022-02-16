@@ -1,15 +1,18 @@
 package com.robotane.campusconnect.ui
 
-import androidx.lifecycle.*
+import android.util.Log
+import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.ViewModel
+import androidx.lifecycle.ViewModelProvider
+import androidx.lifecycle.viewModelScope
+import androidx.sqlite.db.SimpleSQLiteQuery
 import com.robotane.campusconnect.data.FiliereOverviewModel
 import com.robotane.campusconnect.data.FiliereRepository
+import com.robotane.campusconnect.utils.HelperFunctions.Companion.stripAccents
 import com.robotane.campusconnect.utils.UniversityType
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import java.util.regex.Pattern
-import androidx.sqlite.db.SimpleSQLiteQuery
-import com.robotane.campusconnect.utils.HelperFunctions
-import com.robotane.campusconnect.utils.HelperFunctions.Companion.stripAccents
 
 
 class FiliereViewModel(private val repository: FiliereRepository) : ViewModel() {
@@ -17,9 +20,10 @@ class FiliereViewModel(private val repository: FiliereRepository) : ViewModel() 
     // - We can put an observer on the data (instead of polling for changes) and only update the
     //   the UI when the data actually changes.
     // - Repository is completely separated from the UI through the ViewModel.
-    val allWords = repository.allFilieres.asLiveData()
 
     val searchFormationsLiveData = MutableLiveData<List<FiliereOverviewModel>>()
+
+    val TAG = javaClass.simpleName
 
     fun fetchFormationsByQuery(
         bacType: String?,
@@ -41,7 +45,7 @@ class FiliereViewModel(private val repository: FiliereRepository) : ViewModel() 
         }
         strQuery = strQuery.removeSuffix(" OR ") + ") "
         if (strQuery.endsWith("() ")) {
-            strQuery.removeSuffix("() ")
+            strQuery = strQuery.removeSuffix("() ")
         }
         else
             strQuery += "AND "
@@ -55,7 +59,7 @@ class FiliereViewModel(private val repository: FiliereRepository) : ViewModel() 
         }
         strQuery = strQuery.removeSuffix(" OR ") + ") "
         if (strQuery.endsWith("() ")) {
-            strQuery.removeSuffix("() ")
+            strQuery = strQuery.removeSuffix("() ")
         }else
             strQuery += "AND "
 
@@ -69,18 +73,16 @@ class FiliereViewModel(private val repository: FiliereRepository) : ViewModel() 
             }
         }
         strQuery = strQuery.removeSuffix(" OR ") + ") "
-
         if (strQuery.endsWith("() ")) {
-            strQuery.removeSuffix("() ")
+            strQuery = strQuery.removeSuffix("() ")
         }
         else
              strQuery += "AND "
         strQuery += "u.status LIKE ?"
         queryArgsList.add("${universityType?.getDBName()}")
 
-        strQuery = strQuery.replace("AND () ", "").replace("() ", "")
-        println(strQuery)
-        println(queryArgsList.toList())
+        Log.d(TAG, "formations query str: $strQuery")
+        Log.d(TAG, "formations query args: ${queryArgsList.toList()}")
         val query = SimpleSQLiteQuery(strQuery, queryArgsList.toArray())
         viewModelScope.launch(Dispatchers.IO) {
             try {

@@ -1,5 +1,6 @@
 package com.robotane.campusconnect.fragments
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -8,6 +9,8 @@ import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
+import com.robotane.campusconnect.FormationDetailsActivity
 import com.robotane.campusconnect.R
 import com.robotane.campusconnect.databinding.FragmentFormationsResultBinding
 import com.robotane.campusconnect.ui.*
@@ -58,9 +61,18 @@ class FormationsResultFragment : Fragment() {
             filieres?.let { filiereListAdapter.submitList(it) }
         })
 
+        filiereListAdapter.stateRestorationPolicy = RecyclerView.Adapter.StateRestorationPolicy.PREVENT_WHEN_EMPTY
         binding.recyclerview.layoutManager = layoutManager
-        binding.recyclerview.hasFixedSize()
         binding.recyclerview.adapter = filiereListAdapter
+
+        binding.recyclerview.onItemClick { _, position, _ ->
+            val selected = viewModel.searchFormationsLiveData.value?.get(position)
+            selected?.let {
+                val newIntent = Intent(context, FormationDetailsActivity::class.java)
+                newIntent.putExtra(Constants.FORMATION_ID, selected.id)
+                context?.startActivity(newIntent)
+            }
+        }
 
         FastScrollerBuilder(binding.recyclerview).build()
         binding.viewmodel = viewModel
