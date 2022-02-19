@@ -1,6 +1,12 @@
 <resources>
     <string name="app_name">CampusConnect</string>
-    <string name="filiereRcVUfrUniversite">%1s %2s</string>
+    <string name="formationUfrUniversity">%1s %2s</string>
+<!--    <string name="remainingOverTotalPlaces">%1s places restantes sur %2s.</string>-->
+    <plurals name="remainingOverTotalPlaces">
+        <item quantity="one">%1$d place restante sur %2$d</item>
+        <item quantity="other">%1$d places restantes sur %2$d</item>
+    </plurals>
+    <string name="notTyped">Champ non renseigné</string>
     <string name="serie_du_bac">Série du BAC</string>
     <string name="moyenne_du_bac">Moyenne du BAC</string>
     <string name="filieres_souhaitees">Filières souhaitées</string>
@@ -11,6 +17,16 @@
     <string name="university_status_private">Privée</string>
     <string name="university_status_public">Publique</string>
     <string name="search_formation_city_input_helper_text">Vous pouvez choisir jusqu\'à 10 villes</string>
-    <string name="search_formation_formation_input_helper_text">Vous pouvez entrez des mots clés sur la filire, Par exemple: biologie, mathematiques</string>
+    <string name="search_formation_formation_input_helper_text">Entrez des mots clés sur la filière, par exemple: biologie, mathématiques, …</string>
     <string name="university_status_all">Toutes</string>
+    <string name="series">Series autorisées</string>
+    <string name="places_restantes">Places restantes</string>
+    <string name="conditions_particulieres">Conditions particulières</string>
+    <string name="contraintes_particulieres">Contraintes particulières</string>
+    <string name="entretien">Entrétien</string>
+    <string name="matieres_dominantes">Matières dominantes</string>
+    <string name="matieres_importantes_de_la_terminale">Matières importantes de la terminale</string>
+    <string name="niveau_de_sortie">Niveau de sortie</string>
+    <string name="debouches">Débouches</string>
+    <string name="informations_complementaires">Informations complémentaires</string>
 </resources>

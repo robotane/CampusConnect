@@ -1,9 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
+
+        <import type="com.robotane.campusconnect.utils.FormationDetailsTextCreator"/>
         <variable
             name="viewmodel"
             type="com.robotane.campusconnect.ui.FormationDetailsViewModel" />
@@ -14,310 +15,380 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-        <androidx.constraintlayout.widget.ConstraintLayout
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="match_parent"
+            android:padding="@dimen/dimen_common_very_small"
+            android:paddingStart="@dimen/dimen_common_small"
+            android:paddingEnd="@dimen/dimen_common_small"
+            android:orientation="vertical">
 
-            <TextView
-                android:id="@+id/fragment_formation_details_formation_lbl"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="8dp"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                tools:text="@{viewmodel.formation.nom}" />
-
-            <TextView
-                android:id="@+id/fragment_formation_details_formation_university_lbl"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="8dp"
-                android:text="@{viewmodel.formation.nomUniversite}"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/fragment_formation_details_formation_lbl" />
-
-            <TextView
-                android:id="@+id/textView2"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="16dp"
-                android:text="Series autorisées"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/fragment_formation_details_formation_university_lbl" />
-
-            <com.google.android.material.chip.ChipGroup
-                android:id="@+id/chipGroup"
+            <com.google.android.material.card.MaterialCardView
+                android:id="@+id/fragment_formation_details_universite_ufr_cardview"
+                style="?attr/materialCardViewElevatedStyle"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="8dp"
-                android:layout_marginEnd="8dp"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/textView2">
+                android:elevation="@dimen/dimen_common_small"
+                android:layout_margin="@dimen/dimen_common_very_small">
 
-                <com.google.android.material.chip.Chip
-                    android:layout_width="wrap_content"
+                <LinearLayout
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="D" />
+                    android:orientation="vertical"
+                    android:background="@color/colorAccent"
+                    android:padding="@dimen/dimen_common_very_small"
+                    android:paddingStart="@dimen/dimen_common_small"
+                    android:paddingEnd="@dimen/dimen_common_small">
 
-                <com.google.android.material.chip.Chip
-                    android:layout_width="wrap_content"
+                    <TextView
+                        android:id="@+id/fragment_formation_details_formation_lbl"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="8dp"
+                        android:text="@{viewmodel.formation.nom}"
+                        android:textAppearance="?attr/textAppearanceBodyLarge"
+                        tools:text="Sciences Biologiques"/>
+
+                    <TextView
+                        android:id="@+id/fragment_formation_details_ufr_lbl"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="8dp"
+                        android:text="@{viewmodel.formation.ufr}"
+                        android:textAppearance="?attr/textAppearanceBodyLarge"
+                        tools:text="UFR/ST"/>
+
+                    <TextView
+                        android:id="@+id/fragment_formation_details_formation_university_lbl"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="8dp"
+                        android:text="@{viewmodel.formation.nomUniversite}"
+                        android:textAppearance="?attr/textAppearanceBodyMedium"
+                        tools:text="Université NAZI BONI"/>
+                </LinearLayout>
+            </com.google.android.material.card.MaterialCardView>
+
+            <com.google.android.material.card.MaterialCardView
+                android:id="@+id/fragment_formation_details_series_cardview"
+                style="?attr/materialCardViewStyle"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/dimen_common_very_small">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="E" />
+                    android:orientation="vertical"
+                    android:padding="@dimen/dimen_common_very_small"
+                    android:paddingStart="@dimen/dimen_common_small"
+                    android:paddingEnd="@dimen/dimen_common_small">
 
-                <com.google.android.material.chip.Chip
-                    android:layout_width="wrap_content"
+                    <TextView
+                        android:id="@+id/fragment_formation_details_series_lbl"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/series"
+                        android:textAppearance="?attr/textAppearanceBody1" />
+
+                    <com.google.android.material.chip.ChipGroup
+                        android:id="@+id/fragment_formation_details_series_chipgroup"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="8dp"
+                        android:layout_marginEnd="8dp" />
+                </LinearLayout>
+            </com.google.android.material.card.MaterialCardView>
+
+            <com.google.android.material.card.MaterialCardView
+                android:id="@+id/fragment_formation_details_places_cardview"
+                style="?attr/materialCardViewStyle"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/dimen_common_very_small">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="EF" />
-            </com.google.android.material.chip.ChipGroup>
+                    android:orientation="vertical"
+                    android:padding="@dimen/dimen_common_very_small"
+                    android:paddingStart="@dimen/dimen_common_small"
+                    android:paddingEnd="@dimen/dimen_common_small">
 
-            <com.google.android.material.divider.MaterialDivider
-                android:id="@+id/divider3"
-                android:layout_width="0dp"
+                    <TextView
+                        android:id="@+id/fragment_formation_details_places_lbl"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/places_restantes"
+                        android:textAppearance="?attr/textAppearanceBody1" />
+
+                    <TextView
+                        android:id="@+id/fragment_formation_details_places_text"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="8dp"
+                        android:layout_marginEnd="8dp"
+                        android:text="@{viewmodel.formation.placesRestantes!=null?@plurals/remainingOverTotalPlaces(viewmodel.formation.placesRestantes, viewmodel.formation.placesRestantes, viewmodel.formation.placeTotal):@string/notTyped}" />
+<!--                        android:text="@{FormationDetailsTextCreator.placesString(viewmodel.formation.placesRestantes, viewmodel.formation.placeTotal, @string/remainingOverTotalPlaces, @string/notTyped)}" />-->
+
+                </LinearLayout>
+            </com.google.android.material.card.MaterialCardView>
+
+            <com.google.android.material.card.MaterialCardView
+                android:id="@+id/fragment_formation_details_conditions_cardview"
+                style="?attr/materialCardViewStyle"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="@dimen/dimen_common_very_small"
-                android:layout_marginTop="@dimen/dimen_common"
-                android:layout_marginEnd="@dimen/dimen_common_very_small"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/chipGroup" />
+                android:layout_margin="@dimen/dimen_common_very_small">
 
-            <TextView
-                android:id="@+id/fragment_formation_details_conditions_lbl"
-                android:layout_width="wrap_content"
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:padding="@dimen/dimen_common_very_small"
+                    android:paddingStart="@dimen/dimen_common_small"
+                    android:paddingEnd="@dimen/dimen_common_small">
+
+                    <TextView
+                        android:id="@+id/fragment_formation_details_conditions_lbl"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/conditions_particulieres"
+                        android:textAppearance="?attr/textAppearanceBody1" />
+
+                    <TextView
+                        android:id="@+id/fragment_formation_details_conditions_text"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="8dp"
+                        android:layout_marginEnd="8dp"
+                        android:text="@{viewmodel.formation.conditions!=null?viewmodel.formation.conditions:@string/notTyped}" />
+
+                </LinearLayout>
+            </com.google.android.material.card.MaterialCardView>
+
+            <com.google.android.material.card.MaterialCardView
+                android:id="@+id/fragment_formation_details_constraint_cardview"
+                style="?attr/materialCardViewStyle"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Conditions particulieres"
-                android:textAppearance="?attr/textAppearanceBody1"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/divider3" />
+                android:layout_margin="@dimen/dimen_common_very_small">
 
-            <TextView
-                android:id="@+id/fragment_formation_details_conditions_text"
-                android:layout_width="0dp"
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:padding="@dimen/dimen_common_very_small"
+                    android:paddingStart="@dimen/dimen_common_small"
+                    android:paddingEnd="@dimen/dimen_common_small">
+
+                    <TextView
+                        android:id="@+id/fragment_formation_details_constraints_lbl"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/contraintes_particulieres"
+                        android:textAppearance="?attr/textAppearanceBody1" />
+
+                    <TextView
+                        android:id="@+id/fragment_formation_details_constraints_text"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="8dp"
+                        android:layout_marginEnd="8dp"
+                        android:text="@{viewmodel.formation.contraintes!=null?viewmodel.formation.contraintes:@string/notTyped}" />
+                </LinearLayout>
+            </com.google.android.material.card.MaterialCardView>
+
+            <com.google.android.material.card.MaterialCardView
+                android:id="@+id/fragment_formation_details_entretien_cardview"
+                style="?attr/materialCardViewStyle"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="8dp"
-                android:layout_marginEnd="8dp"
-                android:text="@{viewmodel.formation.conditions}"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/fragment_formation_details_conditions_lbl" />
+                android:layout_margin="@dimen/dimen_common_very_small">
 
-            <com.google.android.material.divider.MaterialDivider
-                android:id="@+id/divider2"
-                android:layout_width="0dp"
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:padding="@dimen/dimen_common_very_small"
+                    android:paddingStart="@dimen/dimen_common_small"
+                    android:paddingEnd="@dimen/dimen_common_small">
+
+                    <TextView
+                        android:id="@+id/fragment_formation_details_entretien_lbl"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/entretien"
+                        android:textAppearance="?attr/textAppearanceBody1" />
+
+                    <TextView
+                        android:id="@+id/fragment_formation_details_entretien_text"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="8dp"
+                        android:text="@{viewmodel.formation.entretien!=null?viewmodel.formation.entretien:@string/notTyped}" />
+                </LinearLayout>
+            </com.google.android.material.card.MaterialCardView>
+
+            <com.google.android.material.card.MaterialCardView
+                android:id="@+id/fragment_formation_details_matieres_dominantes_cardview"
+                style="?attr/materialCardViewStyle"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="@dimen/dimen_common_very_small"
-                android:layout_marginTop="@dimen/dimen_common"
-                android:layout_marginEnd="@dimen/dimen_common_very_small"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/fragment_formation_details_conditions_text" />
+                android:layout_margin="@dimen/dimen_common_very_small">
 
-            <TextView
-                android:id="@+id/fragment_formation_details_constraints_lbl"
-                android:layout_width="wrap_content"
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:padding="@dimen/dimen_common_very_small"
+                    android:paddingStart="@dimen/dimen_common_small"
+                    android:paddingEnd="@dimen/dimen_common_small">
+
+                    <TextView
+                        android:id="@+id/fragment_formation_details_matieres_dominantes_lbl"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/matieres_dominantes"
+                        android:textAppearance="?attr/textAppearanceBody1" />
+
+                    <TextView
+                        android:id="@+id/fragment_formation_details_matieres_dominantes_text"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="8dp"
+                        android:layout_marginEnd="8dp"
+                        android:text="@{viewmodel.formation.matieresDominantes!=null?viewmodel.formation.matieresDominantes:@string/notTyped}" />
+                </LinearLayout>
+            </com.google.android.material.card.MaterialCardView>
+
+            <com.google.android.material.card.MaterialCardView
+                android:id="@+id/fragment_formation_details_conditions_matieres_importantes_cardview"
+                style="?attr/materialCardViewStyle"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Contraintes particulieres"
-                android:textAppearance="?attr/textAppearanceBody1"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/divider2" />
+                android:layout_margin="@dimen/dimen_common_very_small">
 
-            <TextView
-                android:id="@+id/fragment_formation_details_constraints_text"
-                android:layout_width="0dp"
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:padding="@dimen/dimen_common_very_small"
+                    android:paddingStart="@dimen/dimen_common_small"
+                    android:paddingEnd="@dimen/dimen_common_small">
+
+                    <TextView
+                        android:id="@+id/fragment_formation_details_matieres_importantes_lbl"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/matieres_importantes_de_la_terminale"
+                        android:textAppearance="?attr/textAppearanceBody1" />
+
+                    <TextView
+                        android:id="@+id/fragment_formation_details_matieres_importantes_text"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="8dp"
+                        android:layout_marginEnd="8dp"
+                        android:text="@{viewmodel.formation.matieresImportantesDeTl!=null?viewmodel.formation.matieresImportantesDeTl:@string/notTyped}" />
+                </LinearLayout>
+            </com.google.android.material.card.MaterialCardView>
+
+            <com.google.android.material.card.MaterialCardView
+                android:id="@+id/fragment_formation_details_niveau_sortie_cardview"
+                style="?attr/materialCardViewStyle"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="8dp"
-                android:layout_marginEnd="8dp"
-                android:text="@{viewmodel.formation.contraintes}"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/fragment_formation_details_constraints_lbl" />
+                android:layout_margin="@dimen/dimen_common_very_small">
 
-            <com.google.android.material.divider.MaterialDivider
-                android:id="@+id/divider"
-                android:layout_width="0dp"
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:padding="@dimen/dimen_common_very_small"
+                    android:paddingStart="@dimen/dimen_common_small"
+                    android:paddingEnd="@dimen/dimen_common_small">
+
+                    <TextView
+                        android:id="@+id/fragment_formation_details_niveau_sortie_lbl"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/niveau_de_sortie"
+                        android:textAppearance="?attr/textAppearanceBody1" />
+
+                    <TextView
+                        android:id="@+id/fragment_formation_details_niveau_sortie_text"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="8dp"
+                        android:text="@{viewmodel.formation.niveauSortie!=null?viewmodel.formation.niveauSortie:@string/notTyped}" />
+                </LinearLayout>
+            </com.google.android.material.card.MaterialCardView>
+
+            <com.google.android.material.card.MaterialCardView
+                android:id="@+id/fragment_formation_details_debouches_cardview"
+                style="?attr/materialCardViewStyle"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="@dimen/dimen_common_very_small"
-                android:layout_marginTop="@dimen/dimen_common"
-                android:layout_marginEnd="@dimen/dimen_common_very_small"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/fragment_formation_details_constraints_text" />
+                android:layout_margin="@dimen/dimen_common_very_small">
 
-            <TextView
-                android:id="@+id/fragment_formation_details_entretien_lbl"
-                android:layout_width="wrap_content"
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:padding="@dimen/dimen_common_very_small"
+                    android:paddingStart="@dimen/dimen_common_small"
+                    android:paddingEnd="@dimen/dimen_common_small">
+
+                    <TextView
+                        android:id="@+id/fragment_formation_details_debouches_lbl"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/debouches"
+                        android:textAppearance="?attr/textAppearanceBody1" />
+
+                    <TextView
+                        android:id="@+id/fragment_formation_details_debouches_text"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="8dp"
+                        android:layout_marginEnd="8dp"
+                        android:text="@{viewmodel.formation.debouches!=null?FormationDetailsTextCreator.debouchesString(viewmodel.formation.debouches):@string/notTyped}" />
+                </LinearLayout>
+            </com.google.android.material.card.MaterialCardView>
+
+            <com.google.android.material.card.MaterialCardView
+                android:id="@+id/fragment_formation_details_infos_complementaires_cardview"
+                style="?attr/materialCardViewStyle"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Entretien"
-                android:textAppearance="?attr/textAppearanceBody1"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/divider" />
+                android:layout_margin="@dimen/dimen_common_very_small">
 
-            <TextView
-                android:id="@+id/fragment_formation_details_entretien_text"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="8dp"
-                android:text="@{viewmodel.formation.entretien}"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/fragment_formation_details_entretien_lbl" />
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:padding="@dimen/dimen_common_very_small"
+                    android:paddingStart="@dimen/dimen_common_small"
+                    android:paddingEnd="@dimen/dimen_common_small">
 
-            <com.google.android.material.divider.MaterialDivider
-                android:id="@+id/divider8"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="@dimen/dimen_common_very_small"
-                android:layout_marginTop="@dimen/dimen_common"
-                android:layout_marginEnd="@dimen/dimen_common_very_small"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/fragment_formation_details_entretien_text" />
+                    <TextView
+                        android:id="@+id/fragment_formation_details_infos_complementaires_lbl"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/informations_complementaires"
+                        android:textAppearance="?attr/textAppearanceBody1" />
 
-            <TextView
-                android:id="@+id/fragment_formation_details_matieres_dominantes_lbl"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Matieres dominantes"
-                android:textAppearance="?attr/textAppearanceBody1"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/divider8" />
+                    <TextView
+                        android:id="@+id/fragment_formation_details_infos_complementaires_text"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="8dp"
+                        android:layout_marginEnd="8dp"
+                        android:text="@{viewmodel.formation.informationsComplementaires!=null?viewmodel.formation.informationsComplementaires:@string/notTyped}" />
+                </LinearLayout>
+            </com.google.android.material.card.MaterialCardView>
 
-            <TextView
-                android:id="@+id/fragment_formation_details_matieres_dominantes_text"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="8dp"
-                android:layout_marginEnd="8dp"
-                android:text="@{viewmodel.formation.matieresDominantes}"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/fragment_formation_details_matieres_dominantes_lbl" />
-
-            <com.google.android.material.divider.MaterialDivider
-                android:id="@+id/divider7"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="@dimen/dimen_common_very_small"
-                android:layout_marginTop="@dimen/dimen_common"
-                android:layout_marginEnd="@dimen/dimen_common_very_small"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/fragment_formation_details_matieres_dominantes_text" />
-
-            <TextView
-                android:id="@+id/fragment_formation_details_matieres_importantes_lbl"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Matieres importantes de la terminale"
-                android:textAppearance="?attr/textAppearanceBody1"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/divider7" />
-
-            <TextView
-                android:id="@+id/fragment_formation_details_matieres_importantes_text"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="8dp"
-                android:layout_marginEnd="8dp"
-                android:text="@{viewmodel.formation.matieresImportantesDeTl}"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/fragment_formation_details_matieres_importantes_lbl" />
-
-            <com.google.android.material.divider.MaterialDivider
-                android:id="@+id/divider6"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="@dimen/dimen_common_very_small"
-                android:layout_marginTop="@dimen/dimen_common"
-                android:layout_marginEnd="@dimen/dimen_common_very_small"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/fragment_formation_details_matieres_importantes_text" />
-
-            <TextView
-                android:id="@+id/fragment_formation_details_niveau_sortie_lbl"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="8dp"
-                android:text="Niveau de sortie"
-                android:textAppearance="?attr/textAppearanceBody1"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/divider6" />
-
-            <TextView
-                android:id="@+id/fragment_formation_details_niveau_sortie_text"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="8dp"
-                android:text="@{viewmodel.formation.niveauSortie}"
-                app:layout_constraintBottom_toBottomOf="@+id/fragment_formation_details_niveau_sortie_lbl"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toEndOf="@+id/fragment_formation_details_niveau_sortie_lbl" />
-
-            <com.google.android.material.divider.MaterialDivider
-                android:id="@+id/divider5"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="@dimen/dimen_common_very_small"
-                android:layout_marginTop="@dimen/dimen_common_small"
-                android:layout_marginEnd="@dimen/dimen_common_very_small"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/fragment_formation_details_niveau_sortie_lbl" />
-
-            <TextView
-                android:id="@+id/fragment_formation_details_debouches_lbl"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Debouches"
-                android:textAppearance="?attr/textAppearanceBody1"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/divider5" />
-
-            <TextView
-                android:id="@+id/fragment_formation_details_debouches_text"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="8dp"
-                android:layout_marginEnd="8dp"
-                android:text="@{viewmodel.formation.debouches}"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/fragment_formation_details_debouches_lbl" />
-
-            <com.google.android.material.divider.MaterialDivider
-                android:id="@+id/divider9"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="@dimen/dimen_common_very_small"
-                android:layout_marginTop="@dimen/dimen_common"
-                android:layout_marginEnd="@dimen/dimen_common_very_small"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/fragment_formation_details_debouches_text" />
-
-            <TextView
-                android:id="@+id/fragment_formation_details_infos_complementaires_lbl"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Informations complementaires"
-                android:textAppearance="?attr/textAppearanceBody1"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/divider9" />
-
-            <TextView
-                android:id="@+id/fragment_formation_details_infos_complementaires_text"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="8dp"
-                android:layout_marginEnd="8dp"
-                android:text="@{viewmodel.formation.informationsComplementaires}"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/fragment_formation_details_infos_complementaires_lbl" />
-
-        </androidx.constraintlayout.widget.ConstraintLayout>
+        </LinearLayout>
     </me.zhanghai.android.fastscroll.FastScrollScrollView>
 </layout>

@@ -1,12 +1,14 @@
 package com.robotane.campusconnect.fragments
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
+import com.google.android.material.chip.Chip
 import com.robotane.campusconnect.R
 import com.robotane.campusconnect.databinding.FragmentFormationDetailsBinding
 import com.robotane.campusconnect.ui.FiliereApplication
@@ -18,7 +20,7 @@ import me.zhanghai.android.fastscroll.FastScrollerBuilder
 class FormationDetailsFragment : Fragment() {
 
     private lateinit var binding: FragmentFormationDetailsBinding
-
+    private val TAG: String = javaClass.simpleName
     val viewModel: FormationDetailsViewModel by activityViewModels {
         FormationsDetailsViewModelFactory((activity?.application as FiliereApplication).repository)
     }
@@ -42,10 +44,22 @@ class FormationDetailsFragment : Fragment() {
 
         val intent = activity?.intent
         val formationId = intent?.getIntExtra(Constants.FORMATION_ID, 0)
-        println("ID: $formationId")
-        formationId?.let {
-            viewModel.getFormationDetails(it) }
+        Log.d(TAG, "formation ID: ${formationId.toString()}")
+        formationId?.let { viewModel.getFormationDetails(it) }
+        viewModel.formation.observeForever {
+            addChip(it.series)
+        }
         FastScrollerBuilder(binding.fragmentFormationDetailsMainSclv).build()
         binding.viewmodel = viewModel
+    }
+
+    private fun addChip(series: String?) {
+        if(isAdded){
+            series?.split(",")?.map(String::trim)?.forEach { serie ->
+                val chip = LayoutInflater.from(context).inflate(R.layout.chip_item, binding.fragmentFormationDetailsSeriesChipgroup, false) as Chip
+                chip.text = serie
+                binding.fragmentFormationDetailsSeriesChipgroup.addView(chip as View)
+            }
+        }
     }
 }

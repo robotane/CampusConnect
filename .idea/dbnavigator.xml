@@ -32,7 +32,7 @@
   </component>
   <component name="DBNavigator.Project.DatabaseConsoleManager">
     <connection id="ae8e1372-af07-442f-865c-35f876c29176">
-      <console name="Connection" type="STANDARD" schema="main" session="Main"><![CDATA[SELECT f.id, u.nom AS nomUniversite, f.ufr, f.nom, f.series, f.place_total as placeTotal, f.places_restantes as placesRestantes, f.debouches FROM filiere f JOIN universite u ON f.id_universite = u.id WHERE f.normalized_nom LIKE '%economie%' AND u.status LIKE '%%%' AND (f.series like '%G2%') AND u.normalized_ville]]></console>
+      <console name="Connection" type="STANDARD" schema="main" session="Main"><![CDATA[SELECT u.nom AS nom_universite, f.ufr, f.nom, f.series, f.entretien, f.contraintes, f.formules_classement, f.place_total, f.places_restantes, f.conditions, f.matieres_dominantes, f.matieres_importantes_de_tl, f.niveau_sortie, f.debouches, f.informations_complementaires FROM filiere f JOIN universite u ON f.id_universite = u.id WHERE f.id = 18]]></console>
     </connection>
     <connection id="27444e7b-9efa-4e85-b406-feeef956c11f">
       <console name="Connection 1" type="STANDARD" schema="main" session="Main" />
@@ -647,6 +647,8 @@
     </general-settings>
   </component>
   <component name="DBNavigator.Project.StatementExecutionManager">
-    <execution-variables />
+    <execution-variables>
+      <file file-url="db://ae8e1372-af07-442f-865c-35f876c29176/consoles/Connection" />
+    </execution-variables>
   </component>
 </project>
