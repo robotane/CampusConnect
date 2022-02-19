@@ -14,12 +14,7 @@ class FormationsSearchViewModel(
     private val savedStateHandle: SavedStateHandle,
     private val repository: FiliereRepository
 ) : ViewModel() {
-/*    val searchQueryModel = FormationSearchQueryModel(
-    savedStateHandle.getLiveData(Constants.UNIVERSITY_TYPE, UniversityType.ANY.itemId),
-    savedStateHandle.getLiveData(Constants.FORMATIONS, ""),
-    savedStateHandle.getLiveData(Constants.TOWNS, ""),
-    savedStateHandle.getLiveData(Constants.BAC_TYPE, ""),
-    )*/
+
     // The ViewModel properties observe directly the values stored in the StateHandler, so, changes are bidirectional
     val universityType = savedStateHandle.getLiveData(Constants.UNIVERSITY_TYPE, UniversityType.ANY.itemId)
     val formation = savedStateHandle.getLiveData(Constants.FORMATIONS, "")
@@ -36,7 +31,7 @@ class FormationsSearchViewModel(
             allBacType.postValue(distinctBT.distinct())
         }
 
-        // Observe repository to retrieve all the bac type
+        // Observe repository to retrieve all the towns
         repository.findDistinctTowns.asLiveData().observeForever { alTW ->
             val distinctTW = ArrayList<String>()
             alTW.forEach { bT -> distinctTW += bT.split(",").map(String::trim) }
