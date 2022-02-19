@@ -10,10 +10,8 @@ data class FiliereOverviewModel(
     @ColumnInfo(name = "nom_universite") val nomUniversite: String?,
     val ufr: String?,
     val nom: String?,
-    val series: String?,
-    @ColumnInfo(name = "place_total") val placeTotal: Int?,
-    @ColumnInfo(name = "places_restantes") val placesRestantes: Int?,
-    val debouches: String?,
+    val conditions: String?,
+    val ville: String?,
 )
 
 data class UniversiteDetailModel(

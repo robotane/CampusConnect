@@ -31,7 +31,7 @@ class FiliereViewModel(private val repository: FiliereRepository) : ViewModel() 
         towns: String?,
         universityType: UniversityType?
     ) {
-        var strQuery = "SELECT f.id, u.nom AS nom_universite, f.ufr, f.nom, f.series, f.place_total, f.places_restantes, f.debouches FROM filiere f JOIN universite u ON f.id_universite = u.id WHERE "
+        var strQuery = "SELECT f.id, u.nom AS nom_universite, u.ville, f.ufr, f.nom, f.conditions FROM filiere f JOIN universite u ON f.id_universite = u.id WHERE "
         val queryArgsList = ArrayList<String>()
 
         strQuery += "("
