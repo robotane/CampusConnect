@@ -5,7 +5,7 @@
     <data>
         <variable
             name="viewmodel"
-            type="com.robotane.campusconnect.ui.FiliereViewModel" />
+            type="com.robotane.campusconnect.ui.FormationsResultViewModel" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -13,7 +13,7 @@
         android:layout_height="match_parent">
 
         <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/recyclerview"
+            android:id="@+id/fragment_formations_result_formations_recyclerview"
             android:layout_width="match_parent"
             android:layout_height="0dp"
             app:layout_constraintBottom_toBottomOf="parent"

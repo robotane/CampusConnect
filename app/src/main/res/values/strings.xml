@@ -6,6 +6,20 @@
         <item quantity="one">%1$d place restante sur %2$d</item>
         <item quantity="other">%1$d places restantes sur %2$d</item>
     </plurals>
+    <string-array name="subjectFullName">
+        <item>note_math§note de Mathématiques</item>
+        <item>note_fra§note de Francais</item>
+        <item>note_pc§note de Physique-Chimie</item>
+        <item>note_ang§note d\'Anglais</item>
+        <item>note_philo§note de Philosophie</item>
+        <item>note_svt§note de Sciences de la Vie et de la Terre</item>
+        <item>note_mg§note de Mathématiques générales</item>
+        <item>note_eo§note d\'Économie</item>
+        <item>moyenne_bac§moyenne du baccalauréat</item>
+    </string-array>
+    <string name="and">et</string>
+    <string name="or">ou</string>
+    <string name="markGreaterThan">%1$s supérieure à %2$s</string>
     <string name="notTyped">Champ non renseigné</string>
     <string name="serie_du_bac">Série du BAC</string>
     <string name="moyenne_du_bac">Moyenne du BAC</string>
@@ -29,4 +43,6 @@
     <string name="niveau_de_sortie">Niveau de sortie</string>
     <string name="debouches">Débouches</string>
     <string name="informations_complementaires">Informations complémentaires</string>
+    <string name="location_icon">Location icon</string>
+    <string name="university_icon">University icon</string>
 </resources>

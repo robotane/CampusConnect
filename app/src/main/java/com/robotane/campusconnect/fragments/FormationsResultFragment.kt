@@ -21,8 +21,8 @@ import me.zhanghai.android.fastscroll.FastScrollerBuilder
 class FormationsResultFragment : Fragment() {
 
     private lateinit var binding: FragmentFormationsResultBinding
-    private val viewModel: FiliereViewModel by activityViewModels {
-        FiliereViewModelFactory((activity?.application as FiliereApplication).repository)
+    private val viewModel: FormationsResultViewModel by activityViewModels {
+        FormationsResultViewModelFactory((activity?.application as FiliereApplication).repository)
     }
 
     companion object {
@@ -61,11 +61,14 @@ class FormationsResultFragment : Fragment() {
             filieres?.let { filiereListAdapter.submitList(it) }
         })
 
-        filiereListAdapter.stateRestorationPolicy = RecyclerView.Adapter.StateRestorationPolicy.PREVENT_WHEN_EMPTY
-        binding.recyclerview.layoutManager = layoutManager
-        binding.recyclerview.adapter = filiereListAdapter
+        //TODO Show a default view when recyclerview is empty
 
-        binding.recyclerview.onItemClick { _, position, _ ->
+        //TODO Add a header with the research statistics: # of formations found, research queries, ...
+        filiereListAdapter.stateRestorationPolicy = RecyclerView.Adapter.StateRestorationPolicy.PREVENT_WHEN_EMPTY
+        binding.fragmentFormationsResultFormationsRecyclerview.layoutManager = layoutManager
+        binding.fragmentFormationsResultFormationsRecyclerview.adapter = filiereListAdapter
+
+        binding.fragmentFormationsResultFormationsRecyclerview.onItemClick { _, position, _ ->
             val selected = viewModel.searchFormationsLiveData.value?.get(position)
             selected?.let {
                 val newIntent = Intent(context, FormationDetailsActivity::class.java)
@@ -74,7 +77,7 @@ class FormationsResultFragment : Fragment() {
             }
         }
 
-        FastScrollerBuilder(binding.recyclerview).build()
+        FastScrollerBuilder(binding.fragmentFormationsResultFormationsRecyclerview).build()
         binding.viewmodel = viewModel
     }
 }

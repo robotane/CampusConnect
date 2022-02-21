@@ -162,7 +162,7 @@
                         android:layout_height="wrap_content"
                         android:layout_marginStart="8dp"
                         android:layout_marginEnd="8dp"
-                        android:text="@{viewmodel.formation.conditions!=null?viewmodel.formation.conditions:@string/notTyped}" />
+                        android:text="@{viewmodel.formation.conditions!=null?FormationDetailsTextCreator.formatListString(viewmodel.formation.conditions):@string/notTyped}" />
 
                 </LinearLayout>
             </com.google.android.material.card.MaterialCardView>
@@ -195,7 +195,7 @@
                         android:layout_height="wrap_content"
                         android:layout_marginStart="8dp"
                         android:layout_marginEnd="8dp"
-                        android:text="@{viewmodel.formation.contraintes!=null?viewmodel.formation.contraintes:@string/notTyped}" />
+                        android:text="@{viewmodel.formation.contraintes!=null?FormationDetailsTextCreator.constraintsString(viewmodel.formation.contraintes, context):@string/notTyped}" />
                 </LinearLayout>
             </com.google.android.material.card.MaterialCardView>
 
@@ -258,7 +258,7 @@
                         android:layout_height="wrap_content"
                         android:layout_marginStart="8dp"
                         android:layout_marginEnd="8dp"
-                        android:text="@{viewmodel.formation.matieresDominantes!=null?viewmodel.formation.matieresDominantes:@string/notTyped}" />
+                        android:text="@{viewmodel.formation.matieresDominantes!=null?FormationDetailsTextCreator.formatListString(viewmodel.formation.matieresDominantes):@string/notTyped}" />
                 </LinearLayout>
             </com.google.android.material.card.MaterialCardView>
 
@@ -290,7 +290,7 @@
                         android:layout_height="wrap_content"
                         android:layout_marginStart="8dp"
                         android:layout_marginEnd="8dp"
-                        android:text="@{viewmodel.formation.matieresImportantesDeTl!=null?viewmodel.formation.matieresImportantesDeTl:@string/notTyped}" />
+                        android:text="@{viewmodel.formation.matieresImportantesDeTl!=null?FormationDetailsTextCreator.formatListString(viewmodel.formation.matieresImportantesDeTl):@string/notTyped}" />
                 </LinearLayout>
             </com.google.android.material.card.MaterialCardView>
 
@@ -353,7 +353,7 @@
                         android:layout_height="wrap_content"
                         android:layout_marginStart="8dp"
                         android:layout_marginEnd="8dp"
-                        android:text="@{viewmodel.formation.debouches!=null?FormationDetailsTextCreator.debouchesString(viewmodel.formation.debouches):@string/notTyped}" />
+                        android:text="@{viewmodel.formation.debouches!=null?FormationDetailsTextCreator.formatListString(viewmodel.formation.debouches):@string/notTyped}" />
                 </LinearLayout>
             </com.google.android.material.card.MaterialCardView>
 
@@ -385,7 +385,7 @@
                         android:layout_height="wrap_content"
                         android:layout_marginStart="8dp"
                         android:layout_marginEnd="8dp"
-                        android:text="@{viewmodel.formation.informationsComplementaires!=null?viewmodel.formation.informationsComplementaires:@string/notTyped}" />
+                        android:text="@{viewmodel.formation.informationsComplementaires!=null?FormationDetailsTextCreator.formatListString(viewmodel.formation.informationsComplementaires):@string/notTyped}" />
                 </LinearLayout>
             </com.google.android.material.card.MaterialCardView>
 

@@ -53,6 +53,7 @@ class FormationDetailsFragment : Fragment() {
         binding.viewmodel = viewModel
     }
 
+    //TODO Chip are duplicated after screen rotation, FIXIT
     private fun addChip(series: String?) {
         if(isAdded){
             series?.split(",")?.map(String::trim)?.forEach { serie ->

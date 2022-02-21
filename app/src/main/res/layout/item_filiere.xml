@@ -43,7 +43,7 @@
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent"
                     app:srcCompat="@android:drawable/ic_menu_report_image"
-                    android:contentDescription="location icon" />
+                    android:contentDescription="@string/university_icon" />
 
                 <TextView
                     android:id="@+id/item_filiere_name_lbl"
@@ -105,7 +105,7 @@
                 android:ellipsize="end"
                 android:maxLines="1"
                 android:minLines="1"
-                android:text="Conditions Particulières"
+                android:text="@string/conditions_particulieres"
                 android:textAppearance="?attr/textAppearanceLabelMedium"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
@@ -150,7 +150,8 @@
                 android:src="@drawable/ic_location"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toStartOf="@+id/item_filiere_universite_ville_lbl"
-                app:layout_constraintTop_toBottomOf="@+id/item_filiere_divider_bottom_lbl" />
+                app:layout_constraintTop_toBottomOf="@+id/item_filiere_divider_bottom_lbl"
+                android:contentDescription="@string/location_icon" />
 
             <TextView
                 android:id="@+id/item_filiere_universite_ville_lbl"
@@ -166,16 +167,6 @@
                 app:layout_constraintTop_toTopOf="@+id/item_filiere_universite_ville_ic_location"
                 tools:text="5 places restantes." />
 
-            <!-- <com.google.android.material.divider.MaterialDivider
-                android:id="@+id/item_filiere_ufr_details_divider_bottom_lbl"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                app:dividerInsetStart="@dimen/dimen_common_small"
-                app:dividerInsetEnd="@dimen/dimen_common_small"
-                app:layout_constraintBottom_toTopOf="@+id/item_filiere_conditions_lbl"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent" />
-    -->
         </androidx.constraintlayout.widget.ConstraintLayout>
 
     </com.google.android.material.card.MaterialCardView>

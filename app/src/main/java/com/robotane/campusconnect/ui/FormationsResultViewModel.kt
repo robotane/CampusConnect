@@ -15,7 +15,7 @@ import kotlinx.coroutines.launch
 import java.util.regex.Pattern
 
 
-class FiliereViewModel(private val repository: FiliereRepository) : ViewModel() {
+class FormationsResultViewModel(private val repository: FiliereRepository) : ViewModel() {
     // Using LiveData and caching what allWords returns has several benefits:
     // - We can put an observer on the data (instead of polling for changes) and only update the
     //   the UI when the data actually changes.
@@ -31,6 +31,10 @@ class FiliereViewModel(private val repository: FiliereRepository) : ViewModel() 
         towns: String?,
         universityType: UniversityType?
     ) {
+        //TODO add alias queries:
+        // droit -> sciences juridiques or droit
+        // biologie -> biologique or biologie
+        // and so on...
         var strQuery = "SELECT f.id, u.nom AS nom_universite, u.ville, f.ufr, f.nom, f.conditions FROM filiere f JOIN universite u ON f.id_universite = u.id WHERE "
         val queryArgsList = ArrayList<String>()
 
@@ -95,12 +99,12 @@ class FiliereViewModel(private val repository: FiliereRepository) : ViewModel() 
     }
 }
 
-class FiliereViewModelFactory(private val repository: FiliereRepository) :
+class FormationsResultViewModelFactory(private val repository: FiliereRepository) :
     ViewModelProvider.Factory {
     override fun <T : ViewModel> create(modelClass: Class<T>): T {
-        if (modelClass.isAssignableFrom(FiliereViewModel::class.java)) {
+        if (modelClass.isAssignableFrom(FormationsResultViewModel::class.java)) {
             @Suppress("UNCHECKED_CAST")
-            return FiliereViewModel(repository) as T
+            return FormationsResultViewModel(repository) as T
         }
         throw IllegalArgumentException("Unknown ViewModel class")
     }
