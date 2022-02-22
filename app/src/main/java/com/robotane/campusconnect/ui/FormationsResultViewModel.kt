@@ -38,13 +38,23 @@ class FormationsResultViewModel(private val repository: FiliereRepository) : Vie
         var strQuery = "SELECT f.id, u.nom AS nom_universite, u.ville, f.ufr, f.nom, f.conditions FROM filiere f JOIN universite u ON f.id_universite = u.id WHERE "
         val queryArgsList = ArrayList<String>()
 
+        // Name query builder
         strQuery += "("
         formations?.let { NNFormations ->
-            stripAccents(NNFormations).lowercase().split(Pattern.compile("[, \t]")).forEach {
-                if (it.isNotBlank()) {
-                    strQuery += "f.normalized_nom LIKE ? OR "
-                    queryArgsList.add("%${it}%")
+            stripAccents(NNFormations).lowercase().split(Pattern.compile(",")).forEach { form ->
+                strQuery += "("
+                form.split(Pattern.compile("[ \t\r]")).forEach {
+                    if (it.isNotBlank()) {
+                        strQuery += "f.normalized_nom LIKE ? AND "
+                        queryArgsList.add("%${it.trim()}%")
+                    }
                 }
+                strQuery = strQuery.removeSuffix(" AND ") + ") "
+                if (strQuery.endsWith("() ")) {
+                    strQuery = strQuery.removeSuffix("() ")
+                }
+                else
+                    strQuery += "OR "
             }
         }
         strQuery = strQuery.removeSuffix(" OR ") + ") "
@@ -54,11 +64,12 @@ class FormationsResultViewModel(private val repository: FiliereRepository) : Vie
         else
             strQuery += "AND "
 
+        // Series query builder
         strQuery += "("
         bacType?.split(Pattern.compile("[, \t]"))?.forEach {
             if (it.isNotBlank()) {
                 strQuery += "f.series LIKE ? OR "
-                queryArgsList.add("%${it}%")
+                queryArgsList.add("%${it.trim()}%")
             }
         }
         strQuery = strQuery.removeSuffix(" OR ") + ") "
@@ -67,6 +78,7 @@ class FormationsResultViewModel(private val repository: FiliereRepository) : Vie
         }else
             strQuery += "AND "
 
+        // Cities query builder
         strQuery += "("
         towns?.let {NNTowns ->
             stripAccents(NNTowns).lowercase().split(",").forEach {
@@ -82,6 +94,8 @@ class FormationsResultViewModel(private val repository: FiliereRepository) : Vie
         }
         else
              strQuery += "AND "
+
+        // Status query builder
         strQuery += "u.status LIKE ?"
         queryArgsList.add("${universityType?.getDBName()}")
 
