@@ -52,19 +52,19 @@ class FormationsResultFragment : Fragment() {
 
         val layoutManager = LinearLayoutManager(context)
 
-        val filiereListAdapter = FiliereListAdapter()
+        val filiereListAdapter = context?.let { FiliereListAdapter(it) }
 
 
         viewModel.fetchFormationsByQuery(bacType, formations, towns, universityType)
-        viewModel.searchFormationsLiveData.observe(viewLifecycleOwner, { filieres ->
+        viewModel.searchFormationsLiveData.observe(viewLifecycleOwner) { filieres ->
             // Update the cached copy of the words in the adapter.
-            filieres?.let { filiereListAdapter.submitList(it) }
-        })
+            filieres?.let { filiereListAdapter?.submitList(it) }
+        }
 
         //TODO Show a default view when recyclerview is empty
 
         //TODO Add a header with the research statistics: # of formations found, research queries, ...
-        filiereListAdapter.stateRestorationPolicy = RecyclerView.Adapter.StateRestorationPolicy.PREVENT_WHEN_EMPTY
+        filiereListAdapter?.stateRestorationPolicy = RecyclerView.Adapter.StateRestorationPolicy.PREVENT_WHEN_EMPTY
         binding.fragmentFormationsResultFormationsRecyclerview.layoutManager = layoutManager
         binding.fragmentFormationsResultFormationsRecyclerview.adapter = filiereListAdapter
 
