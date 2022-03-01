@@ -45,8 +45,9 @@ class FormationsResultViewModel(private val repository: FiliereRepository) : Vie
                 strQuery += "("
                 form.split(Pattern.compile("[ \t\r]")).forEach {
                     if (it.isNotBlank()) {
-                        strQuery += "f.normalized_nom LIKE ? AND "
-                        queryArgsList.add("%${it.trim()}%")
+                        strQuery += "(f.normalized_nom LIKE ? OR f.sigle_nom LIKE ?) AND "
+//                        val element = "%${it.trim()}%"
+                        queryArgsList.addAll(listOf("%${it.trim()}%", it.trim()))
                     }
                 }
                 strQuery = strQuery.removeSuffix(" AND ") + ") "

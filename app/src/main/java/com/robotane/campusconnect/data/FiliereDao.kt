@@ -11,7 +11,7 @@ interface FiliereDao {
     @Query("SELECT f.id, u.nom AS nom_universite, u.ville, f.ufr, f.nom, f.conditions FROM filiere f JOIN universite u ON f.id_universite = u.id")
     fun getAllOverview(): Flow<List<FiliereOverviewModel>>
 
-    @Query("SELECT u.nom AS nom_universite, f.ufr, f.nom, f.series, f.entretien, f.contraintes, f.formules_classement, f.place_total, f.places_restantes, f.conditions, f.matieres_dominantes, f.matieres_importantes_de_tl, f.niveau_sortie, f.debouches, f.informations_complementaires FROM filiere f JOIN universite u ON f.id_universite = u.id WHERE f.id = :id")
+    @Query("SELECT u.nom AS nom_universite, f.ufr, f.nom, f.series, f.entretien, f.contraintes, f.formules_classement, f.places_total, f.places_restantes, f.conditions, f.matieres_dominantes, f.matieres_importantes_de_tl, f.niveau_sortie, f.debouches, f.informations_complementaires FROM filiere f JOIN universite u ON f.id_universite = u.id WHERE f.id = :id")
     fun getFormationDetails(id: Int): FiliereDetailModel
 //    fun getAll(): List<Filiere>
 
