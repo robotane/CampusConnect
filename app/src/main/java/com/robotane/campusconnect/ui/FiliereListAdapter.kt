@@ -15,7 +15,7 @@ import com.robotane.campusconnect.data.FiliereOverviewModel
 import com.robotane.campusconnect.databinding.ItemFiliereBinding
 
 
-class FiliereListAdapter(val context: Context) :
+class FiliereListAdapter(val context: Context?) :
     ListAdapter<FiliereOverviewModel, FiliereListAdapter.FiliereViewHolder>(FilieresComparator()) {
 
     private var lastPosition = -1

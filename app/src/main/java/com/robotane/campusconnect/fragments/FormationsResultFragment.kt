@@ -1,5 +1,6 @@
 package com.robotane.campusconnect.fragments
 
+import android.annotation.SuppressLint
 import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -15,6 +16,7 @@ import com.robotane.campusconnect.R
 import com.robotane.campusconnect.databinding.FragmentFormationsResultBinding
 import com.robotane.campusconnect.ui.*
 import com.robotane.campusconnect.utils.Constants
+import com.robotane.campusconnect.utils.EmptyDataObserver
 import com.robotane.campusconnect.utils.UniversityType
 import me.zhanghai.android.fastscroll.FastScrollerBuilder
 
@@ -40,6 +42,7 @@ class FormationsResultFragment : Fragment() {
         return binding.root
     }
 
+    @SuppressLint("NotifyDataSetChanged")
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
@@ -52,21 +55,28 @@ class FormationsResultFragment : Fragment() {
 
         val layoutManager = LinearLayoutManager(context)
 
-        val filiereListAdapter = context?.let { FiliereListAdapter(it) }
+        val filiereListAdapter = FiliereListAdapter(context)
+
+        val emptyDataObserver = EmptyDataObserver(
+            binding.fragmentFormationsResultFormationsRecyclerview,
+            binding.fragmentFormationsResultEmptyDataParent.root
+        )
 
 
         viewModel.fetchFormationsByQuery(bacType, formations, towns, universityType)
         viewModel.searchFormationsLiveData.observe(viewLifecycleOwner) { filieres ->
             // Update the cached copy of the words in the adapter.
-            filieres?.let { filiereListAdapter?.submitList(it) }
+            filieres?.let { filiereListAdapter.submitList(it) }
+            filiereListAdapter.notifyDataSetChanged()
         }
 
-        //TODO Show a default view when recyclerview is empty
-
         //TODO Add a header with the research statistics: # of formations found, research queries, ...
-        filiereListAdapter?.stateRestorationPolicy = RecyclerView.Adapter.StateRestorationPolicy.PREVENT_WHEN_EMPTY
+        filiereListAdapter.stateRestorationPolicy =
+            RecyclerView.Adapter.StateRestorationPolicy.PREVENT_WHEN_EMPTY
         binding.fragmentFormationsResultFormationsRecyclerview.layoutManager = layoutManager
         binding.fragmentFormationsResultFormationsRecyclerview.adapter = filiereListAdapter
+
+        filiereListAdapter.registerAdapterDataObserver(emptyDataObserver)
 
         binding.fragmentFormationsResultFormationsRecyclerview.onItemClick { _, position, _ ->
             val selected = viewModel.searchFormationsLiveData.value?.get(position)

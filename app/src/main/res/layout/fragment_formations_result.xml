@@ -16,11 +16,21 @@
             android:id="@+id/fragment_formations_result_formations_recyclerview"
             android:layout_width="match_parent"
             android:layout_height="0dp"
+            android:layoutAnimation="@anim/layout_animation"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             tools:listitem="@layout/item_filiere" />
+        <include
+            android:id="@+id/fragment_formations_result_empty_data_parent"
+            layout="@layout/item_empty_dataset"
+            android:layout_width="match_parent"
+            android:visibility="gone"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/fragment_formations_result_formations_recyclerview"
+            android:layout_height="match_parent"
+            android:layout_gravity="center" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

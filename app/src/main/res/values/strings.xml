@@ -45,4 +45,6 @@
     <string name="informations_complementaires">Informations complémentaires</string>
     <string name="location_icon">Location icon</string>
     <string name="university_icon">University icon</string>
+    <string name="item_empty_dataset_title">Oops!!! Aucune formation trouvée!!!</string>
+    <string name="item_empty_dataset_sub_title">Veuillez verifier les mots-clés saisis.\nReduisez le nombre series ou de villes sélectionnées.\nVous pouvez egalement reformuler vos mot-clés. Saisissez par exemple \'biologi\' au lieu de \'biologie\' afin de retrouver les fillières telles que \'Sciences Biologiques\' et \'Biologie Appliquée\'</string>
 </resources>
