@@ -3,34 +3,108 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
+
         <variable
             name="viewmodel"
             type="com.robotane.campusconnect.ui.FormationsResultViewModel" />
     </data>
 
-    <androidx.constraintlayout.widget.ConstraintLayout
+    <androidx.coordinatorlayout.widget.CoordinatorLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/fragment_formations_result_formations_recyclerview"
+        <com.google.android.material.appbar.AppBarLayout
+            android:id="@+id/main.appbar"
             android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layoutAnimation="@anim/layout_animation"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            tools:listitem="@layout/item_filiere" />
-        <include
-            android:id="@+id/fragment_formations_result_empty_data_parent"
-            layout="@layout/item_empty_dataset"
-            android:layout_width="match_parent"
-            android:visibility="gone"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/fragment_formations_result_formations_recyclerview"
-            android:layout_height="match_parent"
-            android:layout_gravity="center" />
+            android:layout_height="wrap_content">
 
-    </androidx.constraintlayout.widget.ConstraintLayout>
+            <com.google.android.material.appbar.CollapsingToolbarLayout
+                android:id="@+id/main.collapsing"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:layout_scrollFlags="scroll|enterAlways"
+                app:contentScrim="@color/transparent"
+                app:scrimAnimationDuration="0">
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="vertical">
+                    <com.google.android.material.card.MaterialCardView
+                        android:id="@+id/fragment_formation_details_universite_ufr_cardview"
+                        style="?attr/materialCardViewElevatedStyle"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:elevation="@dimen/dimen_common_small"
+                        android:layout_margin="@dimen/dimen_common_very_small">
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="vertical"
+                            android:background="@color/colorAccent"
+                            android:padding="@dimen/dimen_common_very_small"
+                            android:paddingStart="@dimen/dimen_common_small"
+                            android:paddingEnd="@dimen/dimen_common_small">
+
+                            <TextView
+                                android:id="@+id/fragment_formation_details_formation_lbl"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginStart="8dp"
+                                android:text="Nom"
+                                android:textAppearance="?attr/textAppearanceBodyLarge"
+                                tools:text="Sciences Biologiques"/>
+
+                            <TextView
+                                android:id="@+id/fragment_formation_details_ufr_lbl"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginStart="8dp"
+                                android:text="Prenom"
+                                android:textAppearance="?attr/textAppearanceBodyLarge"
+                                tools:text="UFR/ST"/>
+
+                            <TextView
+                                android:id="@+id/fragment_formation_details_formation_university_lbl"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginStart="8dp"
+                                android:text="formation"
+                                android:textAppearance="?attr/textAppearanceBodyMedium"
+                                tools:text="Université NAZI BONI"/>
+                        </LinearLayout>
+                    </com.google.android.material.card.MaterialCardView>
+                </LinearLayout>
+
+            </com.google.android.material.appbar.CollapsingToolbarLayout>
+        </com.google.android.material.appbar.AppBarLayout>
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            app:layout_behavior="@string/appbar_scrolling_view_behavior">
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/fragment_formations_result_formations_recyclerview"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layoutAnimation="@anim/layout_animation"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:listitem="@layout/item_filiere" />
+
+            <include
+                android:id="@+id/fragment_formations_result_empty_data_parent"
+                layout="@layout/item_empty_dataset"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_gravity="center"
+                android:visibility="gone"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/fragment_formations_result_formations_recyclerview" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.coordinatorlayout.widget.CoordinatorLayout>
 </layout>
