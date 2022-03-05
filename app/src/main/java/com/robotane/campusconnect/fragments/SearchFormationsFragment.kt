@@ -15,7 +15,26 @@ import com.robotane.campusconnect.ui.FiliereApplication
 import com.robotane.campusconnect.ui.FormationsSearchViewModel
 import com.robotane.campusconnect.ui.FormationsSearchViewModelFactory
 
+
 class SearchFormationsFragment : Fragment() {
+
+    // Declare callback
+    private var mCallback: OnButtonClickedListener? = null
+
+    // Declare our interface that will be implemented by any container activity
+    interface OnButtonClickedListener {
+        fun onButtonClicked(view: View?)
+    }
+
+    // Create callback to parent activity
+    private fun createCallbackToParentActivity() {
+        mCallback = try {
+            // Parent activity will automatically subscribe to callback
+            activity as OnButtonClickedListener?
+        } catch (e: ClassCastException) {
+            throw ClassCastException("$e must implement OnButtonClickedListener")
+        }
+    }
 
     private lateinit var binding: FragmentSearchFormationBinding
     val viewModel: FormationsSearchViewModel by activityViewModels {
@@ -45,6 +64,7 @@ class SearchFormationsFragment : Fragment() {
             textView?.setAdapter(adapter)
             textView?.setTokenizer(MultiAutoCompleteTextView.CommaTokenizer())
         }
+        createCallbackToParentActivity()
 
         viewModel.allTowns.observeForever{
             val adapter  =  ArrayAdapter(requireContext(), R.layout.item_auto_complete_input, it.sorted())
@@ -52,6 +72,7 @@ class SearchFormationsFragment : Fragment() {
             textView?.setAdapter(adapter)
             textView?.setTokenizer(MultiAutoCompleteTextView.CommaTokenizer())
         }
+        viewModel.callback = mCallback
         binding.viewmodel = viewModel
     }
 }

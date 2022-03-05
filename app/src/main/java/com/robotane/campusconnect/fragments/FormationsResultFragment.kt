@@ -28,7 +28,11 @@ class FormationsResultFragment : Fragment() {
     }
 
     companion object {
-        fun newInstance() = FormationsResultFragment()
+        fun newInstance(extras: Bundle?): FormationsResultFragment {
+            val instance = FormationsResultFragment()
+            instance.arguments = extras
+            return instance
+        }
     }
 
 
@@ -46,12 +50,12 @@ class FormationsResultFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        val intent = activity?.intent
-        val bacType = intent?.getStringExtra(Constants.BAC_TYPE)
+        val args = arguments
+        val bacType = args?.getString(Constants.BAC_TYPE)
         val universityType =
-            intent?.getSerializableExtra(Constants.UNIVERSITY_TYPE) as UniversityType?
-        val formations = intent?.getStringExtra(Constants.FORMATIONS)
-        val towns = intent?.getStringExtra(Constants.TOWNS)
+            args?.getSerializable(Constants.UNIVERSITY_TYPE) as UniversityType?
+        val formations = args?.getString(Constants.FORMATIONS)
+        val towns = args?.getString(Constants.TOWNS)
 
         val layoutManager = LinearLayoutManager(context)
 

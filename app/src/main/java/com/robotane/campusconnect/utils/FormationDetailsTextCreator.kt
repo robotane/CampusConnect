@@ -3,6 +3,7 @@ package com.robotane.campusconnect.utils
 import android.content.Context
 import com.robotane.campusconnect.R
 import com.robotane.campusconnect.data.FiliereOverviewModel
+import java.util.*
 
 class FormationDetailsTextCreator {
 
@@ -72,6 +73,9 @@ class FormationDetailsTextCreator {
                 if (it.startsWith("NB:"))
                     return@joinToString "• $it"
 
+                //TODO Find this pattern "([a-z]+_[a-z]+)" with regex and replace the first occurrence of
+                // this occurrence in the string by the 'fullSubjectName', also replace 'AND'
+                // by string and and 'OR' by string or
                 val beginning = "• BAC ${it.substringBefore(":")}: "
                 val toForm = it.substringAfter(":").trim()
                 beginning + if (Regex("([a-z]+_[a-z]+)").containsMatchIn(it)) {
@@ -103,7 +107,7 @@ class FormationDetailsTextCreator {
             return if (conditions.isNullOrBlank()) {
                 "Aucunes conditions particulières"
             } else
-                conditions.replaceFirstChar { c -> c.uppercaseChar() }
+                conditions.replaceFirstChar { if (it.isLowerCase()) it.titlecase(Locale.getDefault()) else it.toString() }
         }
     }
 

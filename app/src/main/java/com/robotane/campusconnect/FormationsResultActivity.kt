@@ -12,7 +12,7 @@ class FormationsResultActivity : AppCompatActivity() {
         setContentView(R.layout.activity_formations_result)
         if (savedInstanceState == null) {
             supportFragmentManager.beginTransaction()
-                .replace(R.id.container2, FormationsResultFragment.newInstance())
+                .replace(R.id.activity_formation_result_fragment_container, FormationsResultFragment.newInstance(intent.extras))
                 .commitNow()
         }
     }

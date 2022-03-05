@@ -3,6 +3,7 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="app/src/main/res/drawable/ic_empty_dataset.xml" value="0.204" />
         <entry key="app/src/main/res/drawable/ic_location.xml" value="0.17735042735042736" />
         <entry key="app/src/main/res/drawable/line.xml" value="0.1" />
         <entry key="app/src/main/res/drawable/line_drawable.xml" value="0.1" />
@@ -14,7 +15,8 @@
         <entry key="app/src/main/res/layout/chip_item.xml" value="0.1" />
         <entry key="app/src/main/res/layout/fragment_formation_details.xml" value="0.1" />
         <entry key="app/src/main/res/layout/fragment_formations_result.xml" value="0.1" />
-        <entry key="app/src/main/res/layout/fragment_search_formation.xml" value="0.4261931187569367" />
+        <entry key="app/src/main/res/layout/fragment_search_formation.xml" value="0.5" />
+        <entry key="app/src/main/res/layout/item_empty_dataset.xml" value="0.67" />
         <entry key="app/src/main/res/layout/item_filiere.xml" value="0.67" />
         <entry key="app/src/main/res/layout/item_universite.xml" value="0.5" />
         <entry key="app/src/main/res/layout/recyclerview_item.xml" value="0.67" />
