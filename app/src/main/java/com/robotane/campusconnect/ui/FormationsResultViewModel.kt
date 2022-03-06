@@ -70,8 +70,8 @@ class FormationsResultViewModel(private val repository: FiliereRepository) : Vie
         strQuery += "("
         bacType?.split(Pattern.compile("[, \t]"))?.forEach {
             if (it.isNotBlank()) {
-                strQuery += "f.series LIKE ? OR "
-                queryArgsList.add("%${it.trim()}%")
+                strQuery += "f.series LIKE ? OR f.series LIKE ? OR f.series LIKE ? OR "
+                queryArgsList.addAll(listOf("${it.trim()},%","% ${it.trim()},%", "% ${it.trim()}"))
             }
         }
         strQuery = strQuery.removeSuffix(" OR ") + ") "
