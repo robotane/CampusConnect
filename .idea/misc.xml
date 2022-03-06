@@ -9,13 +9,16 @@
         <entry key="app/src/main/res/drawable/line_drawable.xml" value="0.1" />
         <entry key="app/src/main/res/drawable/thumb.xml" value="0.1" />
         <entry key="app/src/main/res/drawable/thumb_drawable.xml" value="0.1" />
+        <entry key="app/src/main/res/layout-sw600dp/activity_main.xml" value="0.12297297297297298" />
+        <entry key="app/src/main/res/layout-sw600dp/fragment_formation_details.xml" value="0.220873786407767" />
+        <entry key="app/src/main/res/layout-w600dp/activity_main.xml" value="0.1" />
         <entry key="app/src/main/res/layout/activity_formation_details.xml" value="0.16032608695652173" />
         <entry key="app/src/main/res/layout/activity_formations_result.xml" value="0.1" />
         <entry key="app/src/main/res/layout/activity_main.xml" value="0.1" />
         <entry key="app/src/main/res/layout/chip_item.xml" value="0.1" />
-        <entry key="app/src/main/res/layout/fragment_formation_details.xml" value="0.1" />
+        <entry key="app/src/main/res/layout/fragment_formation_details.xml" value="0.33" />
         <entry key="app/src/main/res/layout/fragment_formations_result.xml" value="0.1" />
-        <entry key="app/src/main/res/layout/fragment_search_formation.xml" value="0.5" />
+        <entry key="app/src/main/res/layout/fragment_search_formation.xml" value="0.18113772455089822" />
         <entry key="app/src/main/res/layout/item_empty_dataset.xml" value="0.67" />
         <entry key="app/src/main/res/layout/item_filiere.xml" value="0.67" />
         <entry key="app/src/main/res/layout/item_universite.xml" value="0.5" />

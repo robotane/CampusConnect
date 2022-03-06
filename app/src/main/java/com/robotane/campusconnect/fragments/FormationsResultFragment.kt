@@ -11,6 +11,8 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import androidx.recyclerview.widget.RecyclerView.ItemAnimator
+import androidx.recyclerview.widget.SimpleItemAnimator
 import com.robotane.campusconnect.FormationDetailsActivity
 import com.robotane.campusconnect.R
 import com.robotane.campusconnect.databinding.FragmentFormationsResultBinding
@@ -19,6 +21,7 @@ import com.robotane.campusconnect.utils.Constants
 import com.robotane.campusconnect.utils.EmptyDataObserver
 import com.robotane.campusconnect.utils.UniversityType
 import me.zhanghai.android.fastscroll.FastScrollerBuilder
+
 
 class FormationsResultFragment : Fragment() {
 
@@ -69,8 +72,9 @@ class FormationsResultFragment : Fragment() {
 
         viewModel.fetchFormationsByQuery(bacType, formations, towns, universityType)
         viewModel.searchFormationsLiveData.observe(viewLifecycleOwner) { filieres ->
-            // Update the cached copy of the words in the adapter.
-            filieres?.let { filiereListAdapter.submitList(it) }
+            // Update the cached copy of the formations in the adapter.
+            filieres?.let(filiereListAdapter::submitList)
+            println("Added ${filieres.size}!!")
             filiereListAdapter.notifyDataSetChanged()
         }
 

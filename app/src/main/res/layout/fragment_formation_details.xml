@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools">
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <data>
 
@@ -14,28 +15,27 @@
         android:id="@+id/fragment_formation_details_main_sclv"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
-
-        <LinearLayout
+        <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:padding="@dimen/dimen_common_very_small"
-            android:paddingStart="@dimen/dimen_common_small"
-            android:paddingEnd="@dimen/dimen_common_small"
-            android:orientation="vertical">
+            android:layout_height="match_parent">
 
             <com.google.android.material.card.MaterialCardView
                 android:id="@+id/fragment_formation_details_universite_ufr_cardview"
                 style="?attr/materialCardViewElevatedStyle"
-                android:layout_width="match_parent"
+                android:layout_width="@dimen/cards_max_width"
                 android:layout_height="wrap_content"
+                android:layout_margin="@dimen/dimen_common_very_small"
                 android:elevation="@dimen/dimen_common_small"
-                android:layout_margin="@dimen/dimen_common_very_small">
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_maxWidth="400dp">
 
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:orientation="vertical"
                     android:background="@color/colorAccent"
+                    android:orientation="vertical"
                     android:padding="@dimen/dimen_common_very_small"
                     android:paddingStart="@dimen/dimen_common_small"
                     android:paddingEnd="@dimen/dimen_common_small">
@@ -47,7 +47,7 @@
                         android:layout_marginStart="8dp"
                         android:text="@{viewmodel.formation.nom}"
                         android:textAppearance="?attr/textAppearanceBodyLarge"
-                        tools:text="Sciences Biologiques"/>
+                        tools:text="Sciences Biologiques" />
 
                     <TextView
                         android:id="@+id/fragment_formation_details_ufr_lbl"
@@ -56,7 +56,7 @@
                         android:layout_marginStart="8dp"
                         android:text="@{viewmodel.formation.ufr}"
                         android:textAppearance="?attr/textAppearanceBodyLarge"
-                        tools:text="UFR/ST"/>
+                        tools:text="UFR/ST" />
 
                     <TextView
                         android:id="@+id/fragment_formation_details_formation_university_lbl"
@@ -65,330 +65,356 @@
                         android:layout_marginStart="8dp"
                         android:text="@{viewmodel.formation.nomUniversite}"
                         android:textAppearance="?attr/textAppearanceBodyMedium"
-                        tools:text="Université NAZI BONI"/>
+                        tools:text="Université NAZI BONI" />
                 </LinearLayout>
             </com.google.android.material.card.MaterialCardView>
 
-            <com.google.android.material.card.MaterialCardView
-                android:id="@+id/fragment_formation_details_series_cardview"
-                style="?attr/materialCardViewStyle"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_margin="@dimen/dimen_common_very_small">
 
-                <LinearLayout
+            <com.google.android.flexbox.FlexboxLayout
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:padding="@dimen/dimen_common_very_small"
+                android:paddingStart="@dimen/dimen_common_small"
+                android:paddingEnd="@dimen/dimen_common_small"
+                app:alignContent="center"
+                app:alignItems="stretch"
+                app:flexWrap="wrap"
+                app:justifyContent="center"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/fragment_formation_details_universite_ufr_cardview">
+
+                <com.google.android.material.card.MaterialCardView
+                    android:id="@+id/fragment_formation_details_series_cardview"
+                    style="?attr/materialCardViewStyle"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:orientation="vertical"
-                    android:padding="@dimen/dimen_common_very_small"
-                    android:paddingStart="@dimen/dimen_common_small"
-                    android:paddingEnd="@dimen/dimen_common_small">
+                    android:layout_margin="@dimen/dimen_common_very_small"
+                    app:layout_maxWidth="400dp">
 
-                    <TextView
-                        android:id="@+id/fragment_formation_details_series_lbl"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="@string/series"
-                        android:textAppearance="?attr/textAppearanceBody1" />
-
-                    <com.google.android.material.chip.ChipGroup
-                        android:id="@+id/fragment_formation_details_series_chipgroup"
+                    <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginStart="8dp"
-                        android:layout_marginEnd="8dp" />
-                </LinearLayout>
-            </com.google.android.material.card.MaterialCardView>
+                        android:orientation="vertical"
+                        android:padding="@dimen/dimen_common_very_small"
+                        android:paddingStart="@dimen/dimen_common_small"
+                        android:paddingEnd="@dimen/dimen_common_small">
 
-            <com.google.android.material.card.MaterialCardView
-                android:id="@+id/fragment_formation_details_places_cardview"
-                style="?attr/materialCardViewStyle"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_margin="@dimen/dimen_common_very_small">
+                        <TextView
+                            android:id="@+id/fragment_formation_details_series_lbl"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/series"
+                            android:textAppearance="?attr/textAppearanceBody1" />
 
-                <LinearLayout
+                        <com.google.android.material.chip.ChipGroup
+                            android:id="@+id/fragment_formation_details_series_chipgroup"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="8dp"
+                            android:layout_marginEnd="8dp" />
+                    </LinearLayout>
+                </com.google.android.material.card.MaterialCardView>
+
+                <com.google.android.material.card.MaterialCardView
+                    android:id="@+id/fragment_formation_details_places_cardview"
+                    style="?attr/materialCardViewStyle"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:orientation="vertical"
-                    android:padding="@dimen/dimen_common_very_small"
-                    android:paddingStart="@dimen/dimen_common_small"
-                    android:paddingEnd="@dimen/dimen_common_small">
+                    android:layout_margin="@dimen/dimen_common_very_small"
+                    app:layout_maxWidth="400dp">
 
-                    <TextView
-                        android:id="@+id/fragment_formation_details_places_lbl"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="@string/places_restantes"
-                        android:textAppearance="?attr/textAppearanceBody1" />
-
-                    <TextView
-                        android:id="@+id/fragment_formation_details_places_text"
+                    <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginStart="8dp"
-                        android:layout_marginEnd="8dp"
-                        android:text="@{viewmodel.formation.placesRestantes!=null?@plurals/remainingOverTotalPlaces(viewmodel.formation.placesRestantes, viewmodel.formation.placesRestantes, viewmodel.formation.placeTotal):@string/notTyped}" />
-<!--                        android:text="@{FormationDetailsTextCreator.placesString(viewmodel.formation.placesRestantes, viewmodel.formation.placeTotal, @string/remainingOverTotalPlaces, @string/notTyped)}" />-->
+                        android:orientation="vertical"
+                        android:padding="@dimen/dimen_common_very_small"
+                        android:paddingStart="@dimen/dimen_common_small"
+                        android:paddingEnd="@dimen/dimen_common_small">
 
-                </LinearLayout>
-            </com.google.android.material.card.MaterialCardView>
+                        <TextView
+                            android:id="@+id/fragment_formation_details_places_lbl"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/places_restantes"
+                            android:textAppearance="?attr/textAppearanceBody1" />
 
-            <com.google.android.material.card.MaterialCardView
-                android:id="@+id/fragment_formation_details_conditions_cardview"
-                style="?attr/materialCardViewStyle"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_margin="@dimen/dimen_common_very_small">
+                        <TextView
+                            android:id="@+id/fragment_formation_details_places_text"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="8dp"
+                            android:layout_marginEnd="8dp"
+                            android:text="@{viewmodel.formation.placesRestantes!=null?@plurals/remainingOverTotalPlaces(viewmodel.formation.placesRestantes, viewmodel.formation.placesRestantes, viewmodel.formation.placeTotal):@string/notTyped}" />
+                        <!--                        android:text="@{FormationDetailsTextCreator.placesString(viewmodel.formation.placesRestantes, viewmodel.formation.placeTotal, @string/remainingOverTotalPlaces, @string/notTyped)}" />-->
 
-                <LinearLayout
+                    </LinearLayout>
+                </com.google.android.material.card.MaterialCardView>
+
+                <com.google.android.material.card.MaterialCardView
+                    android:id="@+id/fragment_formation_details_conditions_cardview"
+                    style="?attr/materialCardViewStyle"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:orientation="vertical"
-                    android:padding="@dimen/dimen_common_very_small"
-                    android:paddingStart="@dimen/dimen_common_small"
-                    android:paddingEnd="@dimen/dimen_common_small">
+                    android:layout_margin="@dimen/dimen_common_very_small"
+                    app:layout_maxWidth="400dp">
 
-                    <TextView
-                        android:id="@+id/fragment_formation_details_conditions_lbl"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="@string/conditions_particulieres"
-                        android:textAppearance="?attr/textAppearanceBody1" />
-
-                    <TextView
-                        android:id="@+id/fragment_formation_details_conditions_text"
+                    <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginStart="8dp"
-                        android:layout_marginEnd="8dp"
-                        android:text="@{viewmodel.formation.conditions!=null?FormationDetailsTextCreator.formatListString(viewmodel.formation.conditions):@string/notTyped}" />
+                        android:orientation="vertical"
+                        android:padding="@dimen/dimen_common_very_small"
+                        android:paddingStart="@dimen/dimen_common_small"
+                        android:paddingEnd="@dimen/dimen_common_small">
 
-                </LinearLayout>
-            </com.google.android.material.card.MaterialCardView>
+                        <TextView
+                            android:id="@+id/fragment_formation_details_conditions_lbl"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/conditions_particulieres"
+                            android:textAppearance="?attr/textAppearanceBody1" />
 
-            <com.google.android.material.card.MaterialCardView
-                android:id="@+id/fragment_formation_details_constraint_cardview"
-                style="?attr/materialCardViewStyle"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_margin="@dimen/dimen_common_very_small">
+                        <TextView
+                            android:id="@+id/fragment_formation_details_conditions_text"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="8dp"
+                            android:layout_marginEnd="8dp"
+                            android:text="@{viewmodel.formation.conditions!=null?FormationDetailsTextCreator.formatListString(viewmodel.formation.conditions):@string/notTyped}" />
 
-                <LinearLayout
+                    </LinearLayout>
+                </com.google.android.material.card.MaterialCardView>
+
+                <com.google.android.material.card.MaterialCardView
+                    android:id="@+id/fragment_formation_details_constraint_cardview"
+                    style="?attr/materialCardViewStyle"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:orientation="vertical"
-                    android:padding="@dimen/dimen_common_very_small"
-                    android:paddingStart="@dimen/dimen_common_small"
-                    android:paddingEnd="@dimen/dimen_common_small">
+                    android:layout_margin="@dimen/dimen_common_very_small"
+                    app:layout_maxWidth="400dp">
 
-                    <TextView
-                        android:id="@+id/fragment_formation_details_constraints_lbl"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="@string/contraintes_particulieres"
-                        android:textAppearance="?attr/textAppearanceBody1" />
-
-                    <TextView
-                        android:id="@+id/fragment_formation_details_constraints_text"
+                    <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginStart="8dp"
-                        android:layout_marginEnd="8dp"
-                        android:text="@{viewmodel.formation.contraintes!=null?FormationDetailsTextCreator.constraintsString(viewmodel.formation.contraintes, context):@string/notTyped}" />
-                </LinearLayout>
-            </com.google.android.material.card.MaterialCardView>
+                        android:orientation="vertical"
+                        android:padding="@dimen/dimen_common_very_small"
+                        android:paddingStart="@dimen/dimen_common_small"
+                        android:paddingEnd="@dimen/dimen_common_small">
 
-            <com.google.android.material.card.MaterialCardView
-                android:id="@+id/fragment_formation_details_entretien_cardview"
-                style="?attr/materialCardViewStyle"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_margin="@dimen/dimen_common_very_small">
+                        <TextView
+                            android:id="@+id/fragment_formation_details_constraints_lbl"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/contraintes_particulieres"
+                            android:textAppearance="?attr/textAppearanceBody1" />
 
-                <LinearLayout
+                        <TextView
+                            android:id="@+id/fragment_formation_details_constraints_text"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="8dp"
+                            android:layout_marginEnd="8dp"
+                            android:text="@{viewmodel.formation.contraintes!=null?FormationDetailsTextCreator.constraintsString(viewmodel.formation.contraintes, context):@string/notTyped}" />
+                    </LinearLayout>
+                </com.google.android.material.card.MaterialCardView>
+
+                <com.google.android.material.card.MaterialCardView
+                    android:id="@+id/fragment_formation_details_entretien_cardview"
+                    style="?attr/materialCardViewStyle"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:orientation="vertical"
-                    android:padding="@dimen/dimen_common_very_small"
-                    android:paddingStart="@dimen/dimen_common_small"
-                    android:paddingEnd="@dimen/dimen_common_small">
+                    android:layout_margin="@dimen/dimen_common_very_small"
+                    app:layout_maxWidth="400dp">
 
-                    <TextView
-                        android:id="@+id/fragment_formation_details_entretien_lbl"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="@string/entretien"
-                        android:textAppearance="?attr/textAppearanceBody1" />
-
-                    <TextView
-                        android:id="@+id/fragment_formation_details_entretien_text"
+                    <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginStart="8dp"
-                        android:text="@{viewmodel.formation.entretien!=null?viewmodel.formation.entretien:@string/notTyped}" />
-                </LinearLayout>
-            </com.google.android.material.card.MaterialCardView>
+                        android:orientation="vertical"
+                        android:padding="@dimen/dimen_common_very_small"
+                        android:paddingStart="@dimen/dimen_common_small"
+                        android:paddingEnd="@dimen/dimen_common_small">
 
-            <com.google.android.material.card.MaterialCardView
-                android:id="@+id/fragment_formation_details_matieres_dominantes_cardview"
-                style="?attr/materialCardViewStyle"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_margin="@dimen/dimen_common_very_small">
+                        <TextView
+                            android:id="@+id/fragment_formation_details_entretien_lbl"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/entretien"
+                            android:textAppearance="?attr/textAppearanceBody1" />
 
-                <LinearLayout
+                        <TextView
+                            android:id="@+id/fragment_formation_details_entretien_text"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="8dp"
+                            android:text="@{viewmodel.formation.entretien!=null?viewmodel.formation.entretien:@string/notTyped}" />
+                    </LinearLayout>
+                </com.google.android.material.card.MaterialCardView>
+
+                <com.google.android.material.card.MaterialCardView
+                    android:id="@+id/fragment_formation_details_niveau_sortie_cardview"
+                    style="?attr/materialCardViewStyle"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:orientation="vertical"
-                    android:padding="@dimen/dimen_common_very_small"
-                    android:paddingStart="@dimen/dimen_common_small"
-                    android:paddingEnd="@dimen/dimen_common_small">
+                    android:layout_margin="@dimen/dimen_common_very_small"
+                    app:layout_maxWidth="400dp">
 
-                    <TextView
-                        android:id="@+id/fragment_formation_details_matieres_dominantes_lbl"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="@string/matieres_dominantes"
-                        android:textAppearance="?attr/textAppearanceBody1" />
-
-                    <TextView
-                        android:id="@+id/fragment_formation_details_matieres_dominantes_text"
+                    <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginStart="8dp"
-                        android:layout_marginEnd="8dp"
-                        android:text="@{viewmodel.formation.matieresDominantes!=null?FormationDetailsTextCreator.formatListString(viewmodel.formation.matieresDominantes):@string/notTyped}" />
-                </LinearLayout>
-            </com.google.android.material.card.MaterialCardView>
+                        android:orientation="vertical"
+                        android:padding="@dimen/dimen_common_very_small"
+                        android:paddingStart="@dimen/dimen_common_small"
+                        android:paddingEnd="@dimen/dimen_common_small">
 
-            <com.google.android.material.card.MaterialCardView
-                android:id="@+id/fragment_formation_details_conditions_matieres_importantes_cardview"
-                style="?attr/materialCardViewStyle"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_margin="@dimen/dimen_common_very_small">
+                        <TextView
+                            android:id="@+id/fragment_formation_details_niveau_sortie_lbl"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/niveau_de_sortie"
+                            android:textAppearance="?attr/textAppearanceBody1" />
 
-                <LinearLayout
+                        <TextView
+                            android:id="@+id/fragment_formation_details_niveau_sortie_text"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="8dp"
+                            android:text="@{viewmodel.formation.niveauSortie!=null?viewmodel.formation.niveauSortie:@string/notTyped}" />
+                    </LinearLayout>
+                </com.google.android.material.card.MaterialCardView>
+
+                <com.google.android.material.card.MaterialCardView
+                    android:id="@+id/fragment_formation_details_matieres_dominantes_cardview"
+                    style="?attr/materialCardViewStyle"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:orientation="vertical"
-                    android:padding="@dimen/dimen_common_very_small"
-                    android:paddingStart="@dimen/dimen_common_small"
-                    android:paddingEnd="@dimen/dimen_common_small">
+                    android:layout_margin="@dimen/dimen_common_very_small"
+                    app:layout_maxWidth="400dp">
 
-                    <TextView
-                        android:id="@+id/fragment_formation_details_matieres_importantes_lbl"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="@string/matieres_importantes_de_la_terminale"
-                        android:textAppearance="?attr/textAppearanceBody1" />
-
-                    <TextView
-                        android:id="@+id/fragment_formation_details_matieres_importantes_text"
+                    <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginStart="8dp"
-                        android:layout_marginEnd="8dp"
-                        android:text="@{viewmodel.formation.matieresImportantesDeTl!=null?FormationDetailsTextCreator.formatListString(viewmodel.formation.matieresImportantesDeTl):@string/notTyped}" />
-                </LinearLayout>
-            </com.google.android.material.card.MaterialCardView>
+                        android:orientation="vertical"
+                        android:padding="@dimen/dimen_common_very_small"
+                        android:paddingStart="@dimen/dimen_common_small"
+                        android:paddingEnd="@dimen/dimen_common_small">
 
-            <com.google.android.material.card.MaterialCardView
-                android:id="@+id/fragment_formation_details_niveau_sortie_cardview"
-                style="?attr/materialCardViewStyle"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_margin="@dimen/dimen_common_very_small">
+                        <TextView
+                            android:id="@+id/fragment_formation_details_matieres_dominantes_lbl"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/matieres_dominantes"
+                            android:textAppearance="?attr/textAppearanceBody1" />
 
-                <LinearLayout
+                        <TextView
+                            android:id="@+id/fragment_formation_details_matieres_dominantes_text"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="8dp"
+                            android:layout_marginEnd="8dp"
+                            android:text="@{viewmodel.formation.matieresDominantes!=null?FormationDetailsTextCreator.formatListString(viewmodel.formation.matieresDominantes):@string/notTyped}" />
+                    </LinearLayout>
+                </com.google.android.material.card.MaterialCardView>
+
+                <com.google.android.material.card.MaterialCardView
+                    android:id="@+id/fragment_formation_details_conditions_matieres_importantes_cardview"
+                    style="?attr/materialCardViewStyle"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:orientation="vertical"
-                    android:padding="@dimen/dimen_common_very_small"
-                    android:paddingStart="@dimen/dimen_common_small"
-                    android:paddingEnd="@dimen/dimen_common_small">
+                    android:layout_margin="@dimen/dimen_common_very_small"
+                    app:layout_maxWidth="400dp">
 
-                    <TextView
-                        android:id="@+id/fragment_formation_details_niveau_sortie_lbl"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="@string/niveau_de_sortie"
-                        android:textAppearance="?attr/textAppearanceBody1" />
-
-                    <TextView
-                        android:id="@+id/fragment_formation_details_niveau_sortie_text"
+                    <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginStart="8dp"
-                        android:text="@{viewmodel.formation.niveauSortie!=null?viewmodel.formation.niveauSortie:@string/notTyped}" />
-                </LinearLayout>
-            </com.google.android.material.card.MaterialCardView>
+                        android:orientation="vertical"
+                        android:padding="@dimen/dimen_common_very_small"
+                        android:paddingStart="@dimen/dimen_common_small"
+                        android:paddingEnd="@dimen/dimen_common_small">
 
-            <com.google.android.material.card.MaterialCardView
-                android:id="@+id/fragment_formation_details_debouches_cardview"
-                style="?attr/materialCardViewStyle"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_margin="@dimen/dimen_common_very_small">
+                        <TextView
+                            android:id="@+id/fragment_formation_details_matieres_importantes_lbl"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/matieres_importantes_de_la_terminale"
+                            android:textAppearance="?attr/textAppearanceBody1" />
 
-                <LinearLayout
+                        <TextView
+                            android:id="@+id/fragment_formation_details_matieres_importantes_text"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="8dp"
+                            android:layout_marginEnd="8dp"
+                            android:text="@{viewmodel.formation.matieresImportantesDeTl!=null?FormationDetailsTextCreator.formatListString(viewmodel.formation.matieresImportantesDeTl):@string/notTyped}" />
+                    </LinearLayout>
+                </com.google.android.material.card.MaterialCardView>
+
+                <com.google.android.material.card.MaterialCardView
+                    android:id="@+id/fragment_formation_details_debouches_cardview"
+                    style="?attr/materialCardViewStyle"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:orientation="vertical"
-                    android:padding="@dimen/dimen_common_very_small"
-                    android:paddingStart="@dimen/dimen_common_small"
-                    android:paddingEnd="@dimen/dimen_common_small">
+                    android:layout_margin="@dimen/dimen_common_very_small"
+                    app:layout_maxWidth="400dp">
 
-                    <TextView
-                        android:id="@+id/fragment_formation_details_debouches_lbl"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="@string/debouches"
-                        android:textAppearance="?attr/textAppearanceBody1" />
-
-                    <TextView
-                        android:id="@+id/fragment_formation_details_debouches_text"
+                    <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginStart="8dp"
-                        android:layout_marginEnd="8dp"
-                        android:text="@{viewmodel.formation.debouches!=null?FormationDetailsTextCreator.formatListString(viewmodel.formation.debouches):@string/notTyped}" />
-                </LinearLayout>
-            </com.google.android.material.card.MaterialCardView>
+                        android:orientation="vertical"
+                        android:padding="@dimen/dimen_common_very_small"
+                        android:paddingStart="@dimen/dimen_common_small"
+                        android:paddingEnd="@dimen/dimen_common_small">
 
-            <com.google.android.material.card.MaterialCardView
-                android:id="@+id/fragment_formation_details_infos_complementaires_cardview"
-                style="?attr/materialCardViewStyle"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_margin="@dimen/dimen_common_very_small">
+                        <TextView
+                            android:id="@+id/fragment_formation_details_debouches_lbl"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/debouches"
+                            android:textAppearance="?attr/textAppearanceBody1" />
 
-                <LinearLayout
+                        <TextView
+                            android:id="@+id/fragment_formation_details_debouches_text"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="8dp"
+                            android:layout_marginEnd="8dp"
+                            android:text="@{viewmodel.formation.debouches!=null?FormationDetailsTextCreator.formatListString(viewmodel.formation.debouches):@string/notTyped}" />
+                    </LinearLayout>
+                </com.google.android.material.card.MaterialCardView>
+
+                <com.google.android.material.card.MaterialCardView
+                    android:id="@+id/fragment_formation_details_infos_complementaires_cardview"
+                    style="?attr/materialCardViewStyle"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:orientation="vertical"
-                    android:padding="@dimen/dimen_common_very_small"
-                    android:paddingStart="@dimen/dimen_common_small"
-                    android:paddingEnd="@dimen/dimen_common_small">
+                    android:layout_margin="@dimen/dimen_common_very_small"
+                    app:layout_maxWidth="@dimen/cards_max_width">
 
-                    <TextView
-                        android:id="@+id/fragment_formation_details_infos_complementaires_lbl"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="@string/informations_complementaires"
-                        android:textAppearance="?attr/textAppearanceBody1" />
-
-                    <TextView
-                        android:id="@+id/fragment_formation_details_infos_complementaires_text"
+                    <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginStart="8dp"
-                        android:layout_marginEnd="8dp"
-                        android:text="@{viewmodel.formation.informationsComplementaires!=null?FormationDetailsTextCreator.formatListString(viewmodel.formation.informationsComplementaires):@string/notTyped}" />
-                </LinearLayout>
-            </com.google.android.material.card.MaterialCardView>
+                        android:orientation="vertical"
+                        android:padding="@dimen/dimen_common_very_small"
+                        android:paddingStart="@dimen/dimen_common_small"
+                        android:paddingEnd="@dimen/dimen_common_small">
 
-        </LinearLayout>
+                        <TextView
+                            android:id="@+id/fragment_formation_details_infos_complementaires_lbl"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/informations_complementaires"
+                            android:textAppearance="?attr/textAppearanceBody1" />
+
+                        <TextView
+                            android:id="@+id/fragment_formation_details_infos_complementaires_text"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="8dp"
+                            android:layout_marginEnd="8dp"
+                            android:text="@{viewmodel.formation.informationsComplementaires!=null?FormationDetailsTextCreator.formatListString(viewmodel.formation.informationsComplementaires):@string/notTyped}" />
+                    </LinearLayout>
+                </com.google.android.material.card.MaterialCardView>
+
+            </com.google.android.flexbox.FlexboxLayout>
+        </androidx.constraintlayout.widget.ConstraintLayout>
     </me.zhanghai.android.fastscroll.FastScrollScrollView>
 </layout>

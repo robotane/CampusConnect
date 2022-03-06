@@ -24,11 +24,21 @@ class FiliereListAdapter(val context: Context?) :
         return FiliereViewHolder(parent)
     }
 
+    init {
+        setHasStableIds(true)
+    }
+
     override fun onBindViewHolder(holder: FiliereViewHolder, position: Int) {
         val current = getItem(position)
         holder.bind(current)
         setAnimation(holder.itemView, position)
     }
+
+    // TODO Formations should have non-null ids
+    override fun getItemId(position: Int): Long {
+        return currentList[position].id?.toLong() ?: position.toLong()
+    }
+
     private fun setAnimation(viewToAnimate: View, position: Int) {
         // If the bound view wasn't previously displayed on screen, it's animated
         if (position > lastPosition) {

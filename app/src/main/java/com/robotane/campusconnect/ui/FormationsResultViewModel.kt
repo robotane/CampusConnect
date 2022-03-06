@@ -35,6 +35,7 @@ class FormationsResultViewModel(private val repository: FiliereRepository) : Vie
         // droit -> sciences juridiques or droit
         // biologie -> biologique or biologie
         // and so on...
+        println("Fetching")
         var strQuery = "SELECT f.id, u.nom AS nom_universite, u.ville, f.ufr, f.nom, f.conditions FROM filiere f JOIN universite u ON f.id_universite = u.id WHERE "
         val queryArgsList = ArrayList<String>()
 
