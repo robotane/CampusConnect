@@ -17,19 +17,21 @@
         android:layout_height="match_parent">
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="match_parent"
+            android:padding="@dimen/dimen_common_very_small"
+            android:paddingStart="@dimen/dimen_common_small"
+            android:paddingEnd="@dimen/dimen_common_small">
 
             <com.google.android.material.card.MaterialCardView
                 android:id="@+id/fragment_formation_details_universite_ufr_cardview"
                 style="?attr/materialCardViewElevatedStyle"
-                android:layout_width="@dimen/cards_max_width"
-                android:layout_height="wrap_content"
+                android:layout_width="0dp"
                 android:layout_margin="@dimen/dimen_common_very_small"
-                android:elevation="@dimen/dimen_common_small"
+                android:layout_height="wrap_content"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
-                app:layout_maxWidth="400dp">
+                app:layout_constraintWidth_max="@dimen/cards_max_width">
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -73,9 +75,7 @@
             <com.google.android.flexbox.FlexboxLayout
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
-                android:padding="@dimen/dimen_common_very_small"
-                android:paddingStart="@dimen/dimen_common_small"
-                android:paddingEnd="@dimen/dimen_common_small"
+                android:layout_marginTop="@dimen/dimen_common_very_small"
                 app:alignContent="center"
                 app:alignItems="stretch"
                 app:flexWrap="wrap"

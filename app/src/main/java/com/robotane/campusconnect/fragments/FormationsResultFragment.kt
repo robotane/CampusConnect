@@ -59,6 +59,7 @@ class FormationsResultFragment : Fragment() {
             args?.getSerializable(Constants.UNIVERSITY_TYPE) as UniversityType?
         val formations = args?.getString(Constants.FORMATIONS)
         val towns = args?.getString(Constants.TOWNS)
+        val isTwoPane = args?.getBoolean(Constants.IS_TWO_PANE, false)
 
         val layoutManager = LinearLayoutManager(context)
 
@@ -70,6 +71,7 @@ class FormationsResultFragment : Fragment() {
         )
 
 
+        viewModel.isTwoPane = isTwoPane == true
         viewModel.fetchFormationsByQuery(bacType, formations, towns, universityType)
         viewModel.searchFormationsLiveData.observe(viewLifecycleOwner) { filieres ->
             // Update the cached copy of the formations in the adapter.

@@ -103,9 +103,9 @@ class FormationDetailsTextCreator {
         }
 
         @JvmStatic
-        fun conditionsString(conditions: String?): String {
+        fun conditionsString(conditions: String?, default: String): String {
             return if (conditions.isNullOrBlank()) {
-                "Aucunes conditions particulières"
+                default
             } else
                 conditions.replaceFirstChar { if (it.isLowerCase()) it.titlecase(Locale.getDefault()) else it.toString() }
         }

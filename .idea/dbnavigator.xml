@@ -28,7 +28,7 @@
   </component>
   <component name="DBNavigator.Project.DatabaseConsoleManager">
     <connection id="ae8e1372-af07-442f-865c-35f876c29176">
-      <console name="Connection" type="STANDARD" schema="main" session="Main"><![CDATA[SELECT u.nom AS nom_universite, f.ufr, f.nom, f.series, f.entretien, f.contraintes, f.formules_classement, f.place_total, f.places_restantes, f.conditions, f.matieres_dominantes, f.matieres_importantes_de_tl, f.niveau_sortie, f.debouches, f.informations_complementaires FROM filiere f JOIN universite u ON f.id_universite = u.id WHERE f.id=37]]></console>
+      <console name="Connection" type="STANDARD" schema="main" session="Main"><![CDATA[SELECT u.nom AS nom_universite, f.ufr, f.nom, f.series, f.entretien, f.contraintes, f.formules_classement, f.places_total, f.places_restantes, f.conditions, f.matieres_dominantes, f.matieres_importantes_de_tl, f.niveau_sortie, f.debouches, f.informations_complementaires FROM filiere f JOIN universite u ON f.id_universite = u.id WHERE f.id=37]]></console>
     </connection>
     <connection id="27444e7b-9efa-4e85-b406-feeef956c11f">
       <console name="Connection 1" type="STANDARD" schema="main" session="Main" />
@@ -70,7 +70,7 @@
   </component>
   <component name="DBNavigator.Project.Settings">
     <connections>
-      <connection id="ae8e1372-af07-442f-865c-35f876c29176" active="true">
+      <connection id="ae8e1372-af07-442f-865c-35f876c29176" active="true" signed="true">
         <database>
           <name value="Connection" />
           <description value="Campus Faso database" />
@@ -157,7 +157,7 @@
           <object-name-filters />
         </object-filters>
       </connection>
-      <connection id="27444e7b-9efa-4e85-b406-feeef956c11f" active="true">
+      <connection id="27444e7b-9efa-4e85-b406-feeef956c11f" active="true" signed="true">
         <database>
           <name value="Connection 1" />
           <description value="" />

@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+    <com.google.android.material.card.MaterialCardView
+        android:id="@+id/fragment_formation_details_universite_ufr_cardview"
+        style="?attr/materialCardViewElevatedStyle"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:elevation="@dimen/dimen_common_small"
+        android:layout_margin="@dimen/dimen_common_very_small">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:padding="@dimen/dimen_common_very_small"
+            android:paddingStart="@dimen/dimen_common_small"
+            android:paddingEnd="@dimen/dimen_common_small">
+
+            <TextView
+                android:id="@+id/fragment_formations_result_formation_name_query_label"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="4dp"
+                android:text="Filieres: "
+                android:textAppearance="?attr/textAppearanceBodyLarge"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+            <TextView
+                android:id="@+id/fragment_formations_result_formation_name_query"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="4dp"
+                android:text="@{viewmodel.formations}"
+                android:textAppearance="?attr/textAppearanceBodyLarge"
+                app:layout_constraintStart_toEndOf="@+id/fragment_formations_result_formation_name_query_label"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:text="Sciences Biologiques" />
+
+            <TextView
+                android:id="@+id/fragment_formations_result_bac_type_query_label"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="4dp"
+                android:text="Filieres: "
+                android:textAppearance="?attr/textAppearanceBodyLarge"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/fragment_formations_result_formation_name_query" />
+
+            <TextView
+                android:id="@+id/fragment_formations_result_bac_type_query"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@{viewmodel.bacType}"
+                android:textAppearance="?attr/textAppearanceBodyLarge"
+                app:layout_constraintStart_toEndOf="@+id/fragment_formations_result_bac_type_query_label"
+                app:layout_constraintTop_toTopOf="@id/fragment_formations_result_bac_type_query_label"
+                tools:text="C, D, G2" />
+
+            <TextView
+                android:id="@+id/fragment_formations_result_towns_query_label"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="4dp"
+                android:text="Villes: "
+                android:textAppearance="?attr/textAppearanceBodyLarge"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/fragment_formations_result_bac_type_query_label" />
+
+            <TextView
+                android:id="@+id/fragment_formations_result_towns_query"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@{viewmodel.towns}"
+                android:textAppearance="?attr/textAppearanceBodyLarge"
+                app:layout_constraintStart_toEndOf="@+id/fragment_formations_result_towns_query_label"
+                app:layout_constraintTop_toTopOf="@id/fragment_formations_result_towns_query_label"
+                tools:text="Bobo Diolasso, Kaya" />
+
+            <TextView
+                android:id="@+id/fragment_formations_result_university_type_query_label"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="4dp"
+                android:text="Universités: "
+                android:textAppearance="?attr/textAppearanceBodyLarge"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/fragment_formations_result_towns_query_label" />
+
+            <TextView
+                android:id="@+id/fragment_formations_result_university_type_query"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@{viewmodel.universityType}"
+                android:textAppearance="?attr/textAppearanceBodyLarge"
+                app:layout_constraintStart_toEndOf="@+id/fragment_formations_result_university_type_query_label"
+                app:layout_constraintTop_toTopOf="@id/fragment_formations_result_university_type_query_label"
+                tools:text="Toutes" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </com.google.android.material.card.MaterialCardView>
+</LinearLayout>

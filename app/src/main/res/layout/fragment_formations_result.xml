@@ -3,6 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
+        <import type="android.view.View"/>
 
         <variable
             name="viewmodel"
@@ -16,7 +17,8 @@
         <com.google.android.material.appbar.AppBarLayout
             android:id="@+id/main.appbar"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="wrap_content"
+            android:visibility="@{viewmodel.isTwoPane?View.GONE:View.VISIBLE}">
 
             <com.google.android.material.appbar.CollapsingToolbarLayout
                 android:id="@+id/main.collapsing"
@@ -31,48 +33,133 @@
                     android:orientation="vertical">
                     <com.google.android.material.card.MaterialCardView
                         android:id="@+id/fragment_formation_details_universite_ufr_cardview"
-                        style="?attr/materialCardViewElevatedStyle"
+                        style="?attr/materialCardViewOutlinedStyle"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:elevation="@dimen/dimen_common_small"
                         android:layout_margin="@dimen/dimen_common_very_small">
 
-                        <LinearLayout
+                        <androidx.constraintlayout.widget.ConstraintLayout
                             android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:orientation="vertical"
-                            android:background="@color/colorAccent"
+                            android:layout_height="match_parent"
                             android:padding="@dimen/dimen_common_very_small"
                             android:paddingStart="@dimen/dimen_common_small"
                             android:paddingEnd="@dimen/dimen_common_small">
 
                             <TextView
-                                android:id="@+id/fragment_formation_details_formation_lbl"
+                                android:id="@+id/fragment_formations_result_formation_name_query_label"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:layout_marginStart="8dp"
-                                android:text="Nom"
+                                android:layout_marginTop="4dp"
+                                android:text="@string/formation_result_header_formation_label"
                                 android:textAppearance="?attr/textAppearanceBodyLarge"
-                                tools:text="Sciences Biologiques"/>
+                                app:layout_constraintStart_toStartOf="parent"
+                                app:layout_constraintTop_toTopOf="parent"/>
 
                             <TextView
-                                android:id="@+id/fragment_formation_details_ufr_lbl"
-                                android:layout_width="wrap_content"
+                                android:id="@+id/fragment_formations_result_formation_name_query"
+                                android:layout_width="0dp"
                                 android:layout_height="wrap_content"
                                 android:layout_marginStart="8dp"
-                                android:text="Prenom"
+                                android:layout_marginEnd="8dp"
+                                android:text="@{viewmodel.formations.length()==0?@string/all:viewmodel.formations}"
                                 android:textAppearance="?attr/textAppearanceBodyLarge"
-                                tools:text="UFR/ST"/>
+                                app:layout_constraintEnd_toEndOf="parent"
+                                app:layout_constraintStart_toEndOf="@+id/fragment_formations_result_formation_name_query_label"
+                                app:layout_constraintTop_toTopOf="@id/fragment_formations_result_formation_name_query_label"
+                                tools:text="Sciences Biologiques" />
 
                             <TextView
-                                android:id="@+id/fragment_formation_details_formation_university_lbl"
+                                android:id="@+id/fragment_formations_result_bac_type_query_label"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
+                                android:layout_marginTop="4dp"
+                                android:text="@string/formation_result_header_bac_type_label"
+                                android:textAppearance="?attr/textAppearanceBodyLarge"
+                                app:layout_constraintStart_toStartOf="parent"
+                                app:layout_constraintTop_toBottomOf="@id/fragment_formations_result_formation_name_query" />
+
+                            <TextView
+                                android:id="@+id/fragment_formations_result_bac_type_query"
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
                                 android:layout_marginStart="8dp"
-                                android:text="formation"
-                                android:textAppearance="?attr/textAppearanceBodyMedium"
-                                tools:text="Université NAZI BONI"/>
-                        </LinearLayout>
+                                android:layout_marginEnd="8dp"
+                                android:text="@{viewmodel.bacType.length()==0?@string/all:viewmodel.bacType}"
+                                android:textAppearance="?attr/textAppearanceBodyLarge"
+                                app:layout_constraintEnd_toEndOf="parent"
+                                app:layout_constraintStart_toEndOf="@+id/fragment_formations_result_bac_type_query_label"
+                                app:layout_constraintTop_toTopOf="@id/fragment_formations_result_bac_type_query_label"
+                                tools:text="C, D, G2" />
+
+                            <TextView
+                                android:id="@+id/fragment_formations_result_towns_query_label"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="4dp"
+                                android:text="@string/formation_result_header_towns_label"
+                                android:textAppearance="?attr/textAppearanceBodyLarge"
+                                app:layout_constraintStart_toStartOf="parent"
+                                app:layout_constraintTop_toBottomOf="@id/fragment_formations_result_bac_type_query" />
+
+                            <TextView
+                                android:id="@+id/fragment_formations_result_towns_query"
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_marginStart="8dp"
+                                android:layout_marginEnd="8dp"
+                                android:text="@{viewmodel.towns.length()==0?@string/all:viewmodel.towns}"
+                                android:textAppearance="?attr/textAppearanceBodyLarge"
+                                app:layout_constraintEnd_toEndOf="parent"
+                                app:layout_constraintStart_toEndOf="@+id/fragment_formations_result_towns_query_label"
+                                app:layout_constraintTop_toTopOf="@id/fragment_formations_result_towns_query_label"
+                                tools:text="Bobo Diolasso, Kaya" />
+
+                            <TextView
+                                android:id="@+id/fragment_formations_result_university_type_query_label"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="4dp"
+                                android:text="@string/formation_result_header_university_type_label"
+                                android:textAppearance="?attr/textAppearanceBodyLarge"
+                                app:layout_constraintStart_toStartOf="parent"
+                                app:layout_constraintTop_toBottomOf="@id/fragment_formations_result_towns_query" />
+
+                            <TextView
+                                android:id="@+id/fragment_formations_result_university_type_query"
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_marginStart="8dp"
+                                android:layout_marginEnd="8dp"
+                                android:text='@{viewmodel.universityType.equals("%")?@string/all:viewmodel.universityType.replace("%", @string/all)}'
+                                android:textAppearance="?attr/textAppearanceBodyLarge"
+                                app:layout_constraintEnd_toEndOf="parent"
+                                app:layout_constraintStart_toEndOf="@+id/fragment_formations_result_university_type_query_label"
+                                app:layout_constraintTop_toTopOf="@id/fragment_formations_result_university_type_query_label"
+                                tools:text="Toutes" />
+
+                            <com.google.android.material.divider.MaterialDivider
+                                android:id="@+id/fragment_formations_result_number_of_formations_divider"
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:layout_marginTop="@dimen/dimen_common_very_small"
+                                app:layout_constraintEnd_toEndOf="parent"
+                                app:layout_constraintStart_toStartOf="parent"
+                                app:layout_constraintTop_toBottomOf="@id/fragment_formations_result_university_type_query_label" />
+
+                            <TextView
+                                android:id="@+id/fragment_formations_result_number_of_formations_label"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="@dimen/dimen_common_very_small"
+                                android:gravity="center"
+                                android:text="@{@plurals/formation_result_header_number_of_formations_label(viewmodel.searchFormationsLiveData.size,viewmodel.searchFormationsLiveData.size)}"
+                                android:textAppearance="?attr/textAppearanceBodyLarge"
+                                app:layout_constraintEnd_toEndOf="parent"
+                                app:layout_constraintStart_toStartOf="parent"
+                                app:layout_constraintTop_toBottomOf="@id/fragment_formations_result_number_of_formations_divider"
+                                tools:text="20 filières trouvées" />
+
+                        </androidx.constraintlayout.widget.ConstraintLayout>
                     </com.google.android.material.card.MaterialCardView>
                 </LinearLayout>
 
@@ -84,6 +171,19 @@
             android:layout_height="match_parent"
             app:layout_behavior="@string/appbar_scrolling_view_behavior">
 
+            <TextView
+                android:id="@+id/fragment_formations_result_formations_result_label"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/formation_result_label"
+                android:textAlignment="center"
+                android:textAppearance="?attr/textAppearanceHeadlineSmall"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                android:visibility="@{viewmodel.isTwoPane?View.VISIBLE:View.GONE}"/>
+
+
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/fragment_formations_result_formations_recyclerview"
                 android:layout_width="match_parent"
@@ -91,7 +191,7 @@
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/fragment_formations_result_formations_result_label"
                 tools:listitem="@layout/item_filiere" />
 
             <include

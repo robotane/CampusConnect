@@ -61,6 +61,7 @@ class MainActivity : AppCompatActivity(), SearchFormationsFragment.OnButtonClick
             Constants.UNIVERSITY_TYPE,
             searchFormationsFragment.viewModel.universityType.value?.let(UniversityType.Companion::getByItemID)
         )
+        extras.putBoolean(Constants.IS_TWO_PANE, isTwoPane)
         if (isTwoPane) {
             supportFragmentManager.beginTransaction()
                 .replace(

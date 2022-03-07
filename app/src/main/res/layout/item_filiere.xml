@@ -121,7 +121,7 @@
                 android:ellipsize="end"
                 android:maxLines="2"
                 android:minLines="2"
-                android:text='@{FormationDetailsTextCreator.conditionsString(formation.conditions)}'
+                android:text='@{FormationDetailsTextCreator.conditionsString(formation.conditions, @string/no_particular_constraints)}'
                 android:textAppearance="?attr/textAppearanceBodySmall"
                 app:layout_constraintBottom_toTopOf="@id/item_filiere_divider_bottom_lbl"
                 app:layout_constraintEnd_toEndOf="parent"

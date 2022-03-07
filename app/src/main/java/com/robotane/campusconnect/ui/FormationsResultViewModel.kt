@@ -22,6 +22,11 @@ class FormationsResultViewModel(private val repository: FiliereRepository) : Vie
     // - Repository is completely separated from the UI through the ViewModel.
 
     val searchFormationsLiveData = MutableLiveData<List<FiliereOverviewModel>>()
+    var bacType = ""
+    var formations = ""
+    var towns = ""
+    var universityType = ""
+    var isTwoPane = false
 
     val TAG = javaClass.simpleName
 
@@ -31,75 +36,69 @@ class FormationsResultViewModel(private val repository: FiliereRepository) : Vie
         towns: String?,
         universityType: UniversityType?
     ) {
+        setQueryProperties(bacType, formations, towns, universityType)
         //TODO add alias queries:
         // droit -> sciences juridiques or droit
         // biologie -> biologique or biologie
         // and so on...
         println("Fetching")
-        var strQuery = "SELECT f.id, u.nom AS nom_universite, u.ville, f.ufr, f.nom, f.conditions FROM filiere f JOIN universite u ON f.id_universite = u.id WHERE "
+        var strQuery =
+            "SELECT f.id, u.nom AS nom_universite, u.ville, f.ufr, f.nom, f.conditions FROM filiere f JOIN universite u ON f.id_universite = u.id WHERE "
         val queryArgsList = ArrayList<String>()
 
         // Name query builder
         strQuery += "("
-        formations?.let { NNFormations ->
-            stripAccents(NNFormations).lowercase().split(Pattern.compile(",")).forEach { form ->
-                strQuery += "("
-                form.split(Pattern.compile("[ \t\r]")).forEach {
-                    if (it.isNotBlank()) {
-                        strQuery += "(f.normalized_nom LIKE ? OR f.sigle_nom LIKE ?) AND "
-//                        val element = "%${it.trim()}%"
-                        queryArgsList.addAll(listOf("%${it.trim()}%", it.trim()))
-                    }
+        this.formations.lowercase().split(",").forEach { form ->
+            strQuery += "("
+            form.split(Pattern.compile("[ \t\r]")).forEach {
+                if (it.isNotBlank()) {
+                    strQuery += "(f.normalized_nom LIKE ? OR f.sigle_nom LIKE ?) AND "
+                    queryArgsList.addAll(listOf("%${it.trim()}%", it.trim()))
                 }
-                strQuery = strQuery.removeSuffix(" AND ") + ") "
-                if (strQuery.endsWith("() ")) {
-                    strQuery = strQuery.removeSuffix("() ")
-                }
-                else
-                    strQuery += "OR "
             }
+            strQuery = strQuery.removeSuffix(" AND ") + ") "
+            if (strQuery.endsWith("() ")) {
+                strQuery = strQuery.removeSuffix("() ")
+            } else
+                strQuery += "OR "
         }
         strQuery = strQuery.removeSuffix(" OR ") + ") "
         if (strQuery.endsWith("() ")) {
             strQuery = strQuery.removeSuffix("() ")
-        }
-        else
+        } else
             strQuery += "AND "
 
         // Series query builder
         strQuery += "("
-        bacType?.split(Pattern.compile("[, \t]"))?.forEach {
+        this.bacType.split(",").forEach {
             if (it.isNotBlank()) {
                 strQuery += "f.series LIKE ? OR f.series LIKE ? OR f.series LIKE ? OR "
-                queryArgsList.addAll(listOf("${it.trim()},%","% ${it.trim()},%", "% ${it.trim()}"))
+                queryArgsList.addAll(listOf("$it,%", "% $it,%", "% $it"))
             }
         }
         strQuery = strQuery.removeSuffix(" OR ") + ") "
         if (strQuery.endsWith("() ")) {
             strQuery = strQuery.removeSuffix("() ")
-        }else
+        } else
             strQuery += "AND "
 
         // Cities query builder
         strQuery += "("
-        towns?.let {NNTowns ->
-            stripAccents(NNTowns).lowercase().split(",").forEach {
-                if (it.isNotBlank()) {
-                    strQuery += "u.normalized_ville LIKE ? OR "
-                    queryArgsList.add("%${it.trim()}%")
-                }
+        this.towns.lowercase().split(",").forEach {
+            if (it.isNotBlank()) {
+                strQuery += "u.normalized_ville LIKE ? OR "
+                queryArgsList.add("%$it%")
             }
         }
         strQuery = strQuery.removeSuffix(" OR ") + ") "
         if (strQuery.endsWith("() ")) {
             strQuery = strQuery.removeSuffix("() ")
-        }
-        else
-             strQuery += "AND "
+        } else
+            strQuery += "AND "
 
         // Status query builder
         strQuery += "u.status LIKE ?"
-        queryArgsList.add("${universityType?.getDBName()}")
+        queryArgsList.add(this.universityType)
 
         Log.d(TAG, "formations query str: $strQuery")
         Log.d(TAG, "formations query args: ${queryArgsList.toList()}")
@@ -113,6 +112,25 @@ class FormationsResultViewModel(private val repository: FiliereRepository) : Vie
             }
         }
     }
+
+    private fun setQueryProperties(
+        bacType: String?,
+        formations: String?,
+        towns: String?,
+        universityType: UniversityType?
+    ) {
+        this.bacType = bacType?.let { getCleanQueryString(it) }?:""
+        this.formations = formations?.let { getCleanQueryString(it) }?:""
+        this.towns = towns?.let { getCleanQueryString(it) }?:""
+        this.universityType = universityType?.getDBName()?:"%"
+    }
+
+    private fun getCleanQueryString(queryString: String) = queryString.split(",")
+        .map(String::trim)
+        .toSet()
+        .filter(String::isNotBlank)
+        .joinToString(", ")
+        .apply { println("'$this'") }
 }
 
 class FormationsResultViewModelFactory(private val repository: FiliereRepository) :
