@@ -46,9 +46,12 @@ class FormationsResultViewModel(private val repository: FiliereRepository) : Vie
             "SELECT f.id, u.nom AS nom_universite, u.ville, f.ufr, f.nom, f.conditions FROM filiere f JOIN universite u ON f.id_universite = u.id WHERE "
         val queryArgsList = ArrayList<String>()
 
+        //TODO Next goal is testing
+
         // Name query builder
         strQuery += "("
-        this.formations.replace(", ", ",")
+        stripAccents(this.formations)
+            .replace(", ", ",")
             .lowercase().split(",")
             .forEach { form ->
                 strQuery += "("
@@ -88,7 +91,8 @@ class FormationsResultViewModel(private val repository: FiliereRepository) : Vie
 
         // Cities query builder
         strQuery += "("
-        this.towns.replace(", ", ",")
+        stripAccents(this.towns)
+            .replace(", ", ",")
             .lowercase().split(",")
             .forEach {
                 if (it.isNotBlank()) {
