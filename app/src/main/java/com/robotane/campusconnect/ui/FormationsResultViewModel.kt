@@ -48,20 +48,22 @@ class FormationsResultViewModel(private val repository: FiliereRepository) : Vie
 
         // Name query builder
         strQuery += "("
-        this.formations.lowercase().split(",").forEach { form ->
-            strQuery += "("
-            form.split(Pattern.compile("[ \t\r]")).forEach {
-                if (it.isNotBlank()) {
-                    strQuery += "(f.normalized_nom LIKE ? OR f.sigle_nom LIKE ?) AND "
-                    queryArgsList.addAll(listOf("%${it.trim()}%", it.trim()))
+        this.formations.replace(", ", ",")
+            .lowercase().split(",")
+            .forEach { form ->
+                strQuery += "("
+                form.split(Pattern.compile("[ \t\r]")).forEach {
+                    if (it.isNotBlank()) {
+                        strQuery += "(f.normalized_nom LIKE ? OR f.sigle_nom LIKE ?) AND "
+                        queryArgsList.addAll(listOf("%${it.trim()}%", it.trim()))
+                    }
                 }
+                strQuery = strQuery.removeSuffix(" AND ") + ") "
+                if (strQuery.endsWith("() ")) {
+                    strQuery = strQuery.removeSuffix("() ")
+                } else
+                    strQuery += "OR "
             }
-            strQuery = strQuery.removeSuffix(" AND ") + ") "
-            if (strQuery.endsWith("() ")) {
-                strQuery = strQuery.removeSuffix("() ")
-            } else
-                strQuery += "OR "
-        }
         strQuery = strQuery.removeSuffix(" OR ") + ") "
         if (strQuery.endsWith("() ")) {
             strQuery = strQuery.removeSuffix("() ")
@@ -70,12 +72,14 @@ class FormationsResultViewModel(private val repository: FiliereRepository) : Vie
 
         // Series query builder
         strQuery += "("
-        this.bacType.split(",").forEach {
-            if (it.isNotBlank()) {
-                strQuery += "f.series LIKE ? OR f.series LIKE ? OR f.series LIKE ? OR "
-                queryArgsList.addAll(listOf("$it,%", "% $it,%", "% $it"))
+        this.bacType.replace(", ", ",")
+            .split(",")
+            .forEach {
+                if (it.isNotBlank()) {
+                    strQuery += "' '||REPLACE(f.series, ',', '')||' ' LIKE ? OR "
+                    queryArgsList.addAll(listOf("% $it %"))
+                }
             }
-        }
         strQuery = strQuery.removeSuffix(" OR ") + ") "
         if (strQuery.endsWith("() ")) {
             strQuery = strQuery.removeSuffix("() ")
@@ -84,12 +88,14 @@ class FormationsResultViewModel(private val repository: FiliereRepository) : Vie
 
         // Cities query builder
         strQuery += "("
-        this.towns.lowercase().split(",").forEach {
-            if (it.isNotBlank()) {
-                strQuery += "u.normalized_ville LIKE ? OR "
-                queryArgsList.add("%$it%")
+        this.towns.replace(", ", ",")
+            .lowercase().split(",")
+            .forEach {
+                if (it.isNotBlank()) {
+                    strQuery += "u.normalized_ville LIKE ? OR "
+                    queryArgsList.add("%$it%")
+                }
             }
-        }
         strQuery = strQuery.removeSuffix(" OR ") + ") "
         if (strQuery.endsWith("() ")) {
             strQuery = strQuery.removeSuffix("() ")
@@ -119,10 +125,10 @@ class FormationsResultViewModel(private val repository: FiliereRepository) : Vie
         towns: String?,
         universityType: UniversityType?
     ) {
-        this.bacType = bacType?.let { getCleanQueryString(it) }?:""
-        this.formations = formations?.let { getCleanQueryString(it) }?:""
-        this.towns = towns?.let { getCleanQueryString(it) }?:""
-        this.universityType = universityType?.getDBName()?:"%"
+        this.bacType = bacType?.let { getCleanQueryString(it) } ?: ""
+        this.formations = formations?.let { getCleanQueryString(it) } ?: ""
+        this.towns = towns?.let { getCleanQueryString(it) } ?: ""
+        this.universityType = universityType?.getDBName() ?: "%"
     }
 
     private fun getCleanQueryString(queryString: String) = queryString.split(",")
