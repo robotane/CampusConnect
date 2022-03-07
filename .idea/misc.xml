@@ -17,7 +17,7 @@
         <entry key="app/src/main/res/layout/activity_main.xml" value="0.1" />
         <entry key="app/src/main/res/layout/chip_item.xml" value="0.1" />
         <entry key="app/src/main/res/layout/fragment_formation_details.xml" value="0.1" />
-        <entry key="app/src/main/res/layout/fragment_formations_result.xml" value="0.67" />
+        <entry key="app/src/main/res/layout/fragment_formations_result.xml" value="0.32918395573997233" />
         <entry key="app/src/main/res/layout/fragment_search_formation.xml" value="0.18113772455089822" />
         <entry key="app/src/main/res/layout/header_formations_result_recyclerview.xml" value="0.33" />
         <entry key="app/src/main/res/layout/item_empty_dataset.xml" value="0.21421215242018538" />
