@@ -12,7 +12,6 @@ import com.robotane.campusconnect.utils.HelperFunctions.Companion.stripAccents
 import com.robotane.campusconnect.utils.UniversityType
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
-import java.util.regex.Pattern
 
 
 class FormationsResultViewModel(private val repository: FiliereRepository) : ViewModel() {
@@ -42,80 +41,78 @@ class FormationsResultViewModel(private val repository: FiliereRepository) : Vie
         // biologie -> biologique or biologie
         // and so on...
         println("Fetching")
-        var strQuery =
+        var query =
             "SELECT f.id, u.nom AS nom_universite, u.ville, f.ufr, f.nom, f.conditions FROM filiere f JOIN universite u ON f.id_universite = u.id WHERE "
         val queryArgsList = ArrayList<String>()
 
         //TODO Next goal is testing
 
         // Name query builder
-        strQuery += "("
+        query += "("
         stripAccents(this.formations)
-            .replace(", ", ",")
-            .lowercase().split(",")
+            .lowercase().split(Regex(", "))
             .forEach { form ->
-                strQuery += "("
-                form.split(Pattern.compile("[ \t\r]")).forEach {
+                query += "("
+                form.split(Regex("[ \t\r]")).forEach {
                     if (it.isNotBlank()) {
-                        strQuery += "(f.normalized_nom LIKE ? OR f.sigle_nom LIKE ?) AND "
+                        query += "(f.normalized_nom LIKE ? OR f.sigle_nom LIKE ?) AND "
                         queryArgsList.addAll(listOf("%${it.trim()}%", it.trim()))
                     }
                 }
-                strQuery = strQuery.removeSuffix(" AND ") + ") "
-                if (strQuery.endsWith("() ")) {
-                    strQuery = strQuery.removeSuffix("() ")
+                query = query.removeSuffix(" AND ") + ") "
+                if (query.endsWith("() ")) {
+                    query = query.removeSuffix("() ")
                 } else
-                    strQuery += "OR "
+                    query += "OR "
             }
-        strQuery = strQuery.removeSuffix(" OR ") + ") "
-        if (strQuery.endsWith("() ")) {
-            strQuery = strQuery.removeSuffix("() ")
+        query = query.removeSuffix(" OR ") + ") "
+        if (query.endsWith("() ")) {
+            query = query.removeSuffix("() ")
         } else
-            strQuery += "AND "
+            query += "AND "
 
         // Series query builder
-        strQuery += "("
-        this.bacType.replace(", ", ",")
-            .split(",")
+        query += "("
+        this.bacType
+            .split(Regex(", "))
             .forEach {
                 if (it.isNotBlank()) {
-                    strQuery += "' '||REPLACE(f.series, ',', '')||' ' LIKE ? OR "
+                    query += "' '||REPLACE(f.series, ',', '')||' ' LIKE ? OR "
                     queryArgsList.addAll(listOf("% $it %"))
                 }
             }
-        strQuery = strQuery.removeSuffix(" OR ") + ") "
-        if (strQuery.endsWith("() ")) {
-            strQuery = strQuery.removeSuffix("() ")
+        query = query.removeSuffix(" OR ") + ") "
+        if (query.endsWith("() ")) {
+            query = query.removeSuffix("() ")
         } else
-            strQuery += "AND "
+            query += "AND "
 
         // Cities query builder
-        strQuery += "("
+        query += "("
         stripAccents(this.towns)
-            .replace(", ", ",")
-            .lowercase().split(",")
+            .lowercase().split(Regex(", "))
             .forEach {
                 if (it.isNotBlank()) {
-                    strQuery += "u.normalized_ville LIKE ? OR "
+                    query += "u.normalized_ville LIKE ? OR "
                     queryArgsList.add("%$it%")
                 }
             }
-        strQuery = strQuery.removeSuffix(" OR ") + ") "
-        if (strQuery.endsWith("() ")) {
-            strQuery = strQuery.removeSuffix("() ")
+        query = query.removeSuffix(" OR ") + ") "
+        if (query.endsWith("() ")) {
+            query = query.removeSuffix("() ")
         } else
-            strQuery += "AND "
+            query += "AND "
 
         // Status query builder
-        strQuery += "u.status LIKE ?"
+        query += "u.status LIKE ?"
         queryArgsList.add(this.universityType)
 
-        Log.d(TAG, "formations query str: $strQuery")
+        Log.d(TAG, "formations query str: $query")
         Log.d(TAG, "formations query args: ${queryArgsList.toList()}")
-        val query = SimpleSQLiteQuery(strQuery, queryArgsList.toArray())
+        val simpleSQLiteQuery = SimpleSQLiteQuery(query, queryArgsList.toArray())
         viewModelScope.launch(Dispatchers.IO) {
             try {
-                val findFormations = repository.findsFormationsOverview(query)
+                val findFormations = repository.findsFormationsOverview(simpleSQLiteQuery)
                 searchFormationsLiveData.postValue(findFormations)
             } catch (e: Exception) {
                 TODO("update the loading state")
